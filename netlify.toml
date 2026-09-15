@@ -1,0 +1,24 @@
+[build]
+  publish = "."
+  command = ""
+
+# Serve the apex and www as one site; www redirects to the apex.
+[[redirects]]
+  from = "https://www.mosabalfridi.me/*"
+  to = "https://mosabalfridi.me/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# index.html carries every image inline, so it must always be revalidated.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
