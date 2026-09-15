@@ -411,7 +411,7 @@
     <div>
       <span class="avail"><span class="pulse"></span><span data-ar="متاح لنقاشات جديدة">Open to new conversations</span></span>
       <h1 data-ar='أبني الأشياء لأعرف إن كانت <span class="grad">تستحق</span>.'>I build things to find out if they <span class="grad">matter</span>.</h1>
-      <p class="hero-sub" data-ar="مهندس حاسب انتقل إلى إدارة المنتجات. أعمل في <b>أربعة أدوار في وقت واحد</b>: منصة ولاء، ومبادرة ذكاء اصطناعي غير ربحية، ومشروع لعميل، ومشروعي الخاص. كل واحد منها يجيب على سؤال لا أستطيع الإجابة عليه من خلف مكتب. وواحد منها أغلقته عن قصد، وهذا أول ما أود الحديث عنه.">Computer engineer turned product owner. I run <b>four roles at once</b> across a loyalty platform, a nonprofit AI initiative, a client build, and my own venture, because every one of them answers a question I could not answer from a desk. One of them I closed on purpose, and that is the part I would talk about first.</p>
+      <p class="hero-sub" data-ar="بدأت في هندسة الشبكات، ثم انتقلت إلى تطوير الأنظمة الخلفية، ثم إلى المنتجات، لأن كل خطوة كانت تقرّبني أكثر من سؤال واحد: هل ينفع هذا أحداً فعلاً؟ ما أسعى إليه هو <b>بناء شيء يصنع فرقاً</b>، وأسرع طريقة عرفتها للتعلّم هي أن أبني أصغر نسخة صادقة وأدع الواقع يقيّمها. واحدة من تلك المحاولات أغلقتها عن قصد، وتعلّمت منها أكثر مما تعلّمت من أي شيء نجح.">I started in network engineering, moved to backend, then moved to product, because each step got me closer to whether the thing actually helped anyone. What I am after is <b>building something that matters</b>, and the fastest way I have found to learn is to build the smallest honest version and let reality grade it. One of those I closed on purpose. I learned more from that than from anything that worked.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://calendar.app.google/DQjQGEx9h1BZB31K6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3.2" y="4.8" width="17.6" height="16" rx="2.4"/><path d="M8 3v3.4M16 3v3.4M3.2 10h17.6"/></svg><span data-ar="احجز مكالمة">Book a call</span></a>
         <a class="btn btn-ghost" href="#work" data-ar="شاهد الأعمال">See the work</a>
@@ -777,7 +777,7 @@
       : '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/>';
   }
   var saved = readTheme();
-  if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+  root.setAttribute("data-theme", (saved === "dark" || saved === "light") ? saved : "light");
   paintIcon();
   tbtn.addEventListener("click", function () {
     var dark = root.getAttribute("data-theme") === "dark" ||
