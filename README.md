@@ -25,3 +25,7 @@ The source lives in the private second-brain repo at
     python build_public.py  # public build, copy kit stripped
 
 Copy the resulting `site/index.html` here and push.
+
+`Musab-Alfridi-CV.pdf` is the downloadable CV linked from the hero and
+contact sections. Its source is `projects/personal-brand/cv/` in the same
+repo; re-render it with headless Chrome and copy the PDF here.
