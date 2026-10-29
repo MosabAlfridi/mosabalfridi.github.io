@@ -1,0 +1,1370 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
+<title>باك أوفيس ماسي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6f8;--surface:#fff;--surface-2:#f0f2f5;--border:#e2e5ea;--text:#15171c;--muted:#5f6773;--faint:#8b929d;
+  --accent:#6d28d9;--accent-2:#efe8fd;--accent-text:#fff;
+  --ok:#157a3d;--ok-bg:#e4f4e9;--warn:#9a5300;--warn-bg:#fdf0db;--bad:#b42318;--bad-bg:#fdeceb;--info:#1f4fd1;--info-bg:#e7eefd;--neutral-bg:#eceef2;
+  --train:#8b5cf6;--ride:#3b82f6;--taxi:#d4a20a;--rental:#16a34a;--meal:#ea6c0a;--extra:#64748b;
+  --hhr-bg:#f4ebd3;--hhr:#7a5a12;--east-bg:#e1edf8;--east:#1d5a8a;--north-bg:#e3f2ea;--north:#1f6b45;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.07);
+  --radius:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1115;--surface:#171a20;--surface-2:#1e222a;--border:#2a2f39;--text:#e8eaee;--muted:#a3aab5;--faint:#7c8492;
+    --accent:#a78bfa;--accent-2:#2a2342;--accent-text:#14111f;
+    --ok:#4ade80;--ok-bg:#12301d;--warn:#fbbf24;--warn-bg:#342a10;--bad:#f87171;--bad-bg:#3a1717;--info:#93b4ff;--info-bg:#17223d;--neutral-bg:#252a33;
+    --hhr-bg:#3a3018;--hhr:#e8c878;--east-bg:#14283a;--east:#8cc2ee;--north-bg:#143021;--north:#86d8ac;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1115;--surface:#171a20;--surface-2:#1e222a;--border:#2a2f39;--text:#e8eaee;--muted:#a3aab5;--faint:#7c8492;
+  --accent:#a78bfa;--accent-2:#2a2342;--accent-text:#14111f;
+  --ok:#4ade80;--ok-bg:#12301d;--warn:#fbbf24;--warn-bg:#342a10;--bad:#f87171;--bad-bg:#3a1717;--info:#93b4ff;--info-bg:#17223d;--neutral-bg:#252a33;
+  --hhr-bg:#3a3018;--hhr:#e8c878;--east-bg:#14283a;--east:#8cc2ee;--north-bg:#143021;--north:#86d8ac;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Arabic',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+h1{font-size:20px;margin:0;font-weight:700}
+h3{font-size:15px;margin:0;font-weight:600}
+h4{font-size:13px;margin:14px 0 8px;font-weight:600;color:var(--muted)}
+.muted{color:var(--muted)} .faint{color:var(--faint)} .xs{font-size:12px} .b{font-weight:600}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;direction:ltr;unicode-bidi:isolate;font-size:12.5px}
+.money{white-space:nowrap;direction:ltr;unicode-bidi:isolate}
+.mb{margin-bottom:16px} .mb-s{margin-bottom:10px} .mt{margin-top:12px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.logo{font-family:system-ui,sans-serif;font-weight:900;font-size:20px;letter-spacing:-1px;direction:ltr}
+.mock-pill{font-size:11.5px;background:var(--warn-bg);color:var(--warn);padding:2px 10px;border-radius:999px;font-weight:600}
+.spacer{flex:1}
+.top input{width:230px}
+.clock{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12.5px;direction:ltr}
+.menu-btn{display:none}
+.top label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+
+.shell{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:calc(100vh - 57px)}
+nav{background:var(--surface);border-inline-end:1px solid var(--border);padding:10px 8px 24px;position:sticky;top:57px;height:calc(100vh - 57px);overflow:auto}
+.ng{font-size:11.5px;color:var(--faint);margin:14px 10px 4px;font-weight:600}
+.nl{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:start;background:none;border:0;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:13.5px;color:var(--text)}
+.nl:hover{background:var(--surface-2)}
+.nl.on{background:var(--accent-2);color:var(--accent);font-weight:600}
+.nl .cnt{font-size:11px;background:var(--bad-bg);color:var(--bad);border-radius:999px;padding:0 7px}
+main{padding:20px 22px 60px;min-width:0}
+.nav-bd{display:none}
+@media (max-width:900px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  nav{position:fixed;top:0;inset-inline-start:0;height:100vh;width:260px;z-index:45;transform:translateX(105%);transition:transform .2s ease}
+  body.nav-open nav{transform:none}
+  body.nav-open .nav-bd{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:44}
+  .menu-btn{display:inline-flex}
+  main{padding:16px 16px 60px}
+  .top input{width:100%;order:10}
+  .top .hide-s{display:none}
+}
+
+/* page header */
+.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.sub{color:var(--muted);margin:4px 0 0;font-size:13px}
+.ph-act{display:flex;gap:8px;flex-wrap:wrap}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);min-width:0}
+.card-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gside{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.gst{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+@media (max-width:1150px){.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.g2,.g3,.gside,.gst{grid-template-columns:minmax(0,1fr)}}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi-l{color:var(--muted);font-size:12px}
+.kpi-v{font-size:clamp(17px,1.5vw,22px);font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap;direction:ltr;unicode-bidi:plaintext;text-align:start;overflow:hidden;text-overflow:ellipsis}
+.kpi-s{font-size:12px;color:var(--faint)}
+.kpi.bad .kpi-v{color:var(--bad)} .kpi.warn .kpi-v{color:var(--warn)} .kpi.ok .kpi-v{color:var(--ok)}
+
+.badge{display:inline-flex;align-items:center;gap:4px;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap;background:var(--neutral-bg);color:var(--muted)}
+.badge.ok{background:var(--ok-bg);color:var(--ok)} .badge.warn{background:var(--warn-bg);color:var(--warn)} .badge.bad{background:var(--bad-bg);color:var(--bad)} .badge.info{background:var(--info-bg);color:var(--info)} .badge.accent{background:var(--accent-2);color:var(--accent)}
+.lchip{font-size:11px;padding:1px 7px;border-radius:6px;font-weight:600;white-space:nowrap}
+.lchip.HHR{background:var(--hhr-bg);color:var(--hhr)} .lchip.EAST{background:var(--east-bg);color:var(--east)} .lchip.NORTH{background:var(--north-bg);color:var(--north)}
+.tag{font-size:11px;border:1px solid var(--border);border-radius:6px;padding:0 6px;color:var(--muted);white-space:nowrap}
+.src{font-size:11px;color:var(--ok);white-space:nowrap} .assume{font-size:11px;color:var(--warn);white-space:nowrap}
+
+.tbl{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:start;font-weight:600;color:var(--muted);background:var(--surface-2);padding:8px 12px;white-space:nowrap;font-size:12px}
+td{padding:8px 12px;border-top:1px solid var(--border);vertical-align:middle}
+td.num,th.num{text-align:end;font-variant-numeric:tabular-nums}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--surface-2)}
+tr.sel td{background:var(--accent-2)}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:10px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;white-space:nowrap;line-height:1.5}
+.btn:hover{background:var(--surface-2)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-text)}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.danger{color:var(--bad)}
+.btn.okb{color:var(--ok)}
+.btn.sm{padding:3px 9px;font-size:12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+input,select,textarea{font:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);min-width:0;max-width:100%}
+input[type=number]{width:96px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:-1px}
+textarea{width:100%;min-height:64px;resize:vertical}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+.filters input[type=search]{width:260px}
+@media (max-width:900px){.filters input[type=search]{width:100%}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--border);background:var(--surface);padding:4px 12px;border-radius:999px;cursor:pointer;font-size:12.5px}
+.chip.on{background:var(--text);color:var(--surface);border-color:var(--text)}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;font-size:12px;color:var(--muted)}
+
+.legs{display:inline-flex;gap:3px;align-items:center}
+.lg{width:18px;height:6px;border-radius:3px;display:inline-block}
+.lg.train{background:var(--train)} .lg.ride{background:var(--ride)} .lg.taxi{background:var(--taxi)} .lg.rental{background:var(--rental)} .lg.meal{background:var(--meal)} .lg.extra{background:var(--extra)}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;gap:5px;align-items:center}
+
+.lbar{display:flex;align-items:center;gap:8px;min-width:120px}
+.track{flex:1;height:6px;background:var(--neutral-bg);border-radius:4px;overflow:hidden;min-width:60px}
+.fill{height:100%;border-radius:4px}
+.fill.ok{background:var(--ok)} .fill.warn{background:var(--warn)} .fill.bad{background:var(--bad)} .fill.acc{background:var(--accent)}
+.lbar span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:34px}
+
+.callout{background:var(--accent-2);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px}
+.callout ol{margin:8px 0 0;padding-inline-start:20px}
+.callout li{margin:2px 0}
+.note{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--muted)}
+.note b{color:var(--text)}
+.warnbox{background:var(--warn-bg);color:var(--text);border-radius:10px;padding:10px 12px;font-size:12.5px}
+.badbox{background:var(--bad-bg);border-radius:10px;padding:10px 12px;font-size:12.5px}
+.okbox{background:var(--ok-bg);border-radius:10px;padding:10px 12px;font-size:12.5px}
+
+.alerts{display:grid;gap:6px}
+.alert{display:flex;align-items:center;gap:10px;text-align:start;width:100%;border:1px solid var(--border);background:var(--surface);border-radius:10px;padding:8px 10px;cursor:pointer}
+.alert:hover{background:var(--surface-2)}
+.alert .dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--faint)}
+.alert.warn .dot{background:var(--warn)} .alert.bad .dot{background:var(--bad)} .alert.info .dot{background:var(--info)}
+.alert span.t{flex:1;display:flex;flex-direction:column}
+.alert small{color:var(--muted);font-size:12px}
+.alert .go{color:var(--faint)}
+.integ{display:grid;gap:4px}
+.integ div{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:4px 0;border-bottom:1px dashed var(--border)}
+.integ div:last-child{border-bottom:0}
+.integ .n{flex:1}
+.sd{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+.sd.warn{background:var(--warn)} .sd.bad{background:var(--bad)}
+
+.form{display:grid;gap:10px}
+.form label{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.form label select,.form label input{width:100%}
+.form label input[type=number]{width:140px}
+
+.steps{display:grid;gap:8px;margin-top:12px}
+.step{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:8px 10px;background:var(--surface)}
+.step .n{width:22px;height:22px;border-radius:50%;background:var(--neutral-bg);display:grid;place-items:center;font-size:12px;flex:none}
+.step.done .n{background:var(--ok);color:#fff}
+.step.skip{opacity:.55}
+.step .t{flex:1;display:flex;flex-direction:column}
+.step .t small{color:var(--muted);font-size:12px}
+.dcard{border:1px solid var(--border);border-radius:var(--radius);padding:14px;background:var(--surface);margin-bottom:14px}
+.dcard.active{border-color:color-mix(in srgb,var(--warn) 50%,var(--border))}
+.ikpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:12px 0}
+.ikpi{background:var(--surface-2);border-radius:8px;padding:8px 10px}
+.ikpi b{display:block;font-size:17px}
+.ikpi span{font-size:11.5px;color:var(--muted)}
+
+/* drawer */
+.drawer{position:fixed;inset:0;z-index:60;display:none}
+.drawer.open{display:block}
+.drawer-bd{position:absolute;inset:0;background:rgba(10,12,16,.38)}
+.drawer-panel{position:absolute;top:0;bottom:0;inset-inline-end:0;width:min(660px,100%);background:var(--bg);display:flex;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.drawer-head h2{font-size:16px;margin:0}
+.drawer-body{flex:1;overflow:auto;padding:16px;display:grid;gap:14px;align-content:start}
+.sec{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.sec h3{margin-bottom:10px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px}
+.kv dt{color:var(--muted)} .kv dd{margin:0}
+.leg{border:1px solid var(--border);border-inline-start:4px solid var(--c,var(--border));border-radius:10px;padding:10px 12px;background:var(--surface);display:grid;gap:3px;font-size:13px}
+.leg.train{--c:var(--train)} .leg.ride{--c:var(--ride)} .leg.taxi{--c:var(--taxi)} .leg.rental{--c:var(--rental)} .leg.meal{--c:var(--meal)} .leg.extra{--c:var(--extra)}
+.leg-h{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.journey{display:grid;gap:8px}
+.hist{display:grid;gap:0}
+.hist div{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:6px 0;border-bottom:1px dashed var(--border);font-size:12.5px}
+.hist div:last-child{border-bottom:0}
+.hist .w{color:var(--muted)}
+.qt td,.qt th{padding:6px 8px}
+.stops{list-style:none;margin:0;padding:0}
+.stops li{display:flex;align-items:center;gap:10px;padding:6px 0;position:relative}
+.stops li .sdot{width:10px;height:10px;border-radius:50%;border:2px solid var(--train);background:var(--surface);flex:none;z-index:1}
+.stops li:not(:last-child)::after{content:"";position:absolute;inset-inline-start:4px;top:22px;bottom:-8px;width:2px;background:var(--border)}
+.stops li b{flex:1;font-weight:500}
+.msgs{display:grid;gap:8px}
+.msg{padding:8px 12px;border-radius:10px;background:var(--surface-2);font-size:13px;max-width:85%}
+.msg.me{background:var(--accent-2);justify-self:end}
+.msg small{display:block;color:var(--muted);font-size:11px}
+
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:center;font-size:12.5px}
+.barrow .track{height:10px}
+@media (max-width:600px){.barrow{grid-template-columns:90px 1fr auto}}
+.matrix td,.matrix th{text-align:center}
+.matrix td:first-child,.matrix th:first-child{text-align:start}
+.chk{color:var(--ok);font-weight:700} .x{color:var(--faint)}
+.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;cursor:pointer;text-align:start;display:grid;gap:6px}
+.pcard:hover{border-color:var(--accent)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:12px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;font-size:13px;color:var(--muted);white-space:nowrap}
+.tab.on{color:var(--text);border-bottom-color:var(--accent);font-weight:600}
+.tpl{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface);display:grid;gap:6px}
+.tpl p{margin:0;font-size:13px}
+.tpl .en{direction:ltr;text-align:left;color:var(--muted);font-size:12px}
+
+#toasts{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:80;display:grid;gap:8px;width:min(440px,calc(100% - 32px))}
+.toast{background:var(--text);color:var(--surface);padding:10px 14px;border-radius:10px;font-size:13px;box-shadow:0 6px 24px rgba(0,0,0,.2);animation:tin .2s ease}
+.toast.bad{background:var(--bad);color:#fff}
+@keyframes tin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+s{color:var(--faint)}
+.warn-t{color:var(--warn);font-weight:600}
+.bad-t{color:var(--bad);font-weight:600}
+.ok-t{color:var(--ok);font-weight:600}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="btn sm menu-btn" data-action="toggleNav" aria-label="القائمة">القائمة</button>
+  <div class="brand"><span>باك أوفيس ماسي</span><span class="mock-pill">تصور غير رسمي من مصعب · بيانات وهمية</span></div>
+  <div class="spacer"></div>
+  <input id="gq" type="search" placeholder="بحث سريع: رقم طلب، اسم، جوال، PNR" autocomplete="off">
+  <label>الدور <select id="roleSel" data-bind="role"></select></label>
+  <button class="btn sm" data-action="theme" aria-label="الوضع">الوضع</button>
+  <span class="clock hide-s" id="clock"></span>
+</header>
+<div class="shell">
+  <div class="nav-bd" data-action="toggleNav"></div>
+  <nav id="nav"></nav>
+  <main id="main"></main>
+</div>
+<div id="drawer" class="drawer" aria-hidden="true">
+  <div class="drawer-bd" data-action="closeDrawer"></div>
+  <aside class="drawer-panel" role="dialog" aria-modal="true">
+    <div class="drawer-head"><h2 id="drawerTitle"></h2><button class="btn sm" data-action="closeDrawer">إغلاق</button></div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+</div>
+<div id="toasts"></div>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s);
+
+/* ================= utils ================= */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const rnd=mulberry32(1932);
+const ri=(a,b)=>a+Math.floor(rnd()*(b-a+1));
+const pick=a=>a[Math.floor(rnd()*a.length)];
+const chance=p=>rnd()<p;
+function wpick(pairs){let tot=0;for(const p of pairs)tot+=p[1];let r=rnd()*tot;for(const [v,w] of pairs){r-=w;if(r<0)return v;}return pairs[pairs.length-1][0];}
+function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=n=>Number(n).toLocaleString('en-US');
+const r2=n=>Math.round(n*100)/100;
+const moneyT=n=>r2(n).toLocaleString('en-US',{maximumFractionDigits:Math.abs(n)>=1000?0:2})+' ر.س';
+const money=n=>`<span class="money">${moneyT(n)}</span>`;
+const sumObj=o=>{let s=0;for(const k in o)s+=o[k];return s;};
+const sumBy=(a,f)=>a.reduce((s,x)=>s+f(x),0);
+const CODECH='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const code=n=>{let s='';for(let i=0;i<n;i++)s+=CODECH[Math.floor(rnd()*CODECH.length)];return s;};
+
+const MIN=6e4,HOUR=36e5,DAYMS=864e5;
+const DAY0=(()=>{const d=new Date();d.setHours(0,0,0,0);return d.getTime();})();
+const NOW=()=>Date.now();
+const pad=n=>String(n).padStart(2,'0');
+const hhmm=ms=>{const d=new Date(ms);return pad(d.getHours())+':'+pad(d.getMinutes());};
+const dayOff=ms=>Math.floor((ms-DAY0)/DAYMS);
+function dayLabel(ms){const o=dayOff(ms);return o===0?'اليوم':o===1?'بكرة':o===2?'بعد بكرة':o===-1?'أمس':o===3?'بعد 3 أيام':new Date(ms).toLocaleDateString('en-GB',{day:'numeric',month:'numeric'});}
+const dt=ms=>dayLabel(ms)+' '+hhmm(ms);
+function dur(ms){const m=Math.round(Math.abs(ms)/MIN);if(m<60)return m+' د';const h=Math.floor(m/60),mm=m%60;if(h<48)return h+' س'+(mm?' '+mm+' د':'');return Math.round(h/24)+' يوم';}
+function rel(ms){const d=ms-NOW();if(Math.abs(d)<MIN)return 'الآن';return d>0?'بعد '+dur(d):'قبل '+dur(d);}
+
+/* ================= reference data ================= */
+const ST={MKK:'مكة',JED:'جدة السليمانية',KAIA:'مطار الملك عبدالعزيز',KAEC:'مدينة الملك عبدالله الاقتصادية',MED:'المدينة المنورة',RYE:'الرياض (محطة الشرق)',HOF:'الهفوف',ABQ:'بقيق',DMM:'الدمام',RYN:'الرياض (محطة الشمال)',MJM:'المجمعة',QSM:'القصيم',HAS:'حائل',JOF:'الجوف',QRY:'القريات'};
+const ST_OP={MKK:'HHR',JED:'HHR',KAIA:'HHR',KAEC:'HHR',MED:'HHR',RYE:'SAR',HOF:'SAR',ABQ:'SAR',DMM:'SAR',RYN:'SAR',MJM:'SAR',QSM:'SAR',HAS:'SAR',JOF:'SAR',QRY:'SAR'};
+const LINES={
+  HHR:{n:'قطار الحرمين',op:'HHR',sys:'إندرا',stops:['MKK','JED','KAIA','KAEC','MED'],mins:[0,35,47,77,140]},
+  EAST:{n:'قطار الشرق',op:'SAR',sys:'نظام سار',stops:['RYE','HOF','ABQ','DMM'],mins:[0,150,185,225]},
+  NORTH:{n:'قطار الشمال',op:'SAR',sys:'نظام سار',stops:['RYN','MJM','QSM','HAS','JOF','QRY'],mins:[0,90,170,290,500,590]}
+};
+const OPS={HHR:'الحرمين',SAR:'سار'};
+const CLASSES={ECO:'اقتصادي',BUS:'أعمال',SAV:'اقتصادي موفّر',SEC:'اقتصادي',SBU:'أعمال',SBP:'أعمال بريميوم',CAB:'كبينة خاصة',CAP:'كبينة خاصة بريميوم'};
+const CAPS={HHR:{ECO:341,BUS:76},EAST:{SAV:100,SEC:160,SBU:64,SBP:24},NORTH:{SAV:80,SEC:140,SBU:48,SBP:16,CAB:40,CAP:12}};
+const PER_COACH={ECO:38,BUS:19,SAV:50,SEC:40,SBU:32,SBP:12,CAB:10,CAP:4};
+const ALLOW={ECO:23,BUS:32,SAV:0,SEC:23,SBU:25,SBP:32,CAB:25,CAP:32};
+const CH={APP:'تطبيق ماسي',WEB:'موقع ماسي',NUSUK:'نُسك',SAUDIA:'السعودية للطيران',AGENT:'وكلاء',STATION:'شباك المحطة',GROUP:'مجموعات'};
+const QUOTA_PCT={HHR:{APP:.35,WEB:.08,NUSUK:.2,SAUDIA:.07,AGENT:.1,STATION:.1,GROUP:.1},SAR:{APP:.45,WEB:.15,AGENT:.1,STATION:.2,GROUP:.1}};
+const CH_W={HHR:[['APP',38],['WEB',9],['NUSUK',18],['SAUDIA',6],['AGENT',10],['STATION',11],['GROUP',3]],SAR:[['APP',48],['WEB',14],['AGENT',10],['STATION',22],['GROUP',2]]};
+const CLS_W={HHR:[['ECO',82],['BUS',18]],EAST:[['SAV',26],['SEC',48],['SBU',19],['SBP',7]],NORTH:[['SAV',24],['SEC',42],['SBU',14],['SBP',5],['CAB',11],['CAP',4]]};
+const PM=[['مدى',50],['Apple Pay',25],['فيزا',15],['ماستركارد',10]];
+const PARTNERS={
+  JEENY:{n:'جيني',kind:'توصيل',cls:'ride',com:.12,sla:95,actual:93.8,api:'ok',ref:'JNY-'},
+  TAXA:{n:'تكسا (CTC)',kind:'تاكسي',cls:'taxi',com:.10,sla:93,actual:95.1,api:'ok',ref:'TXA-'},
+  TELGANI:{n:'تلقاني',kind:'تأجير سيارات',cls:'rental',com:.08,sla:97,actual:98.2,api:'slow',ref:'TLG-'},
+  BUS:{n:'حافلات مكة',kind:'حافلات',cls:'ride',com:.05,sla:90,actual:91.4,api:'ok',ref:'BUS-'},
+  CATER:{n:'مزوّد التموين',kind:'وجبات ومتجر',cls:'meal',com:.25,sla:98,actual:99.0,api:'ok',ref:'CAT-'}
+};
+const payeeName=k=>OPS[k]||(PARTNERS[k]&&PARTNERS[k].n)||(k==='MASI'?'ماسي':k);
+const CITY={MKK:['العزيزية','الشوقية','النسيم','العوالي','الزاهر'],JED:['الروضة','الشاطئ','السلامة','الحمراء','النعيم'],KAIA:['الصالة 1','صالة الحجاج','الصالة الشمالية'],KAEC:['حي البيلسان','حي الشروق'],MED:['قباء','العزيزية','العيون','المنطقة المركزية'],RYE:['الملقا','النرجس','الياسمين','العليا','الروضة','قرطبة'],RYN:['الصحافة','حطين','الغدير','العارض','الوادي'],HOF:['المحمدية','الملك فهد','الخالدية'],ABQ:['الربوة','الريان'],DMM:['الشاطئ','الفيصلية','المزروعية','الخبر الشمالية'],MJM:['الفيصلية','المطار'],QSM:['بريدة، الريان','عنيزة، الفيصلية','بريدة، الصفراء'],HAS:['النقرة','المنتزه','البادية'],JOF:['سكاكا، الشلهوب','سكاكا، الفيصلية'],QRY:['الحمراء','الصالحية']};
+const MALE=['محمد','عبدالله','فهد','خالد','سعود','عبدالرحمن','فيصل','سلمان','تركي','نواف','ماجد','يوسف','عمر','بندر','راكان','مشعل','سلطان','ناصر','إبراهيم','حمد'];
+const FEMALE=['نورة','سارة','ريم','هيفاء','لمى','العنود','منيرة','دانة','جواهر','شهد','أمل','هند','لطيفة','غادة','رزان'];
+const FAM=['العتيبي','القحطاني','الشمري','الدوسري','الحربي','الغامدي','الزهراني','المطيري','السبيعي','العنزي','الشهري','الرشيدي','التميمي','البقمي','العمري','الجهني','المالكي','الخالدي','السهلي','الفيفي'];
+const INTL=['Ahmed Raza','Fatima Yusuf','Muhammad Rizwan','Aisha Bello','Hasan Demir','Siti Aminah','Abdul Karim','Zainab Okafor','Imran Qureshi','Nur Aisyah','Yusuf Kaya','Mariam Diallo','Omar Farooq','Rahmat Hidayat','Khadija Sow'];
+const PL=['أ','ب','ح','د','ر','س','ص','ط','ع','ق','ك','ل','م','ن','و','ى'];
+const PRM=['كرسي متحرك','مساعدة في الصعود','ضعف بصر','مرافق لكبير سن'];
+const CARS=['تويوتا كامري','هيونداي إلنترا','كيا K5','نيسان صني','تويوتا راف فور'];
+const MENU=[
+  {id:'m1',n:'دجاج مشوي مع خضار',cat:'وجبة ساخنة',kcal:380,price:45,al:['ألبان','مكسرات'],on:true},
+  {id:'m2',n:'برياني لحم',cat:'وجبة ساخنة',kcal:620,price:55,al:['ألبان'],on:true},
+  {id:'m3',n:'سلطة كينوا',cat:'وجبة باردة',kcal:290,price:35,al:['مكسرات'],on:true},
+  {id:'m4',n:'ساندويتش حلومي',cat:'وجبة باردة',kcal:410,price:28,al:['ألبان','قمح'],on:true},
+  {id:'m5',n:'كرواسون زعتر',cat:'مخبوزات',kcal:330,price:14,al:['قمح','ألبان'],on:true},
+  {id:'m6',n:'قهوة سعودية مع تمر',cat:'مشروبات',kcal:120,price:18,al:[],on:true},
+  {id:'m7',n:'لاتيه',cat:'مشروبات',kcal:190,price:20,al:['ألبان'],on:true},
+  {id:'m8',n:'عصير برتقال طازج',cat:'مشروبات',kcal:140,price:16,al:[],on:true},
+  {id:'m11',n:'وجبة أطفال',cat:'وجبة ساخنة',kcal:350,price:30,al:['قمح','ألبان'],on:true},
+  {id:'m9',n:'علبة تمر هدية',cat:'هدايا',kcal:null,price:65,al:[],on:true},
+  {id:'m10',n:'مجسّم قطار',cat:'هدايا',kcal:null,price:95,al:[],on:true}
+];
+const MENU_BY={};MENU.forEach(m=>MENU_BY[m.id]=m);
+const REASONS=['عطل فني في القطار','عطل في الإشارات','أحوال جوية (غبار)','حالة طبية على متن القطار','تأخر قطار سابق على نفس الخط'];
+const GW_REASONS=['تجربة سيئة في الرحلة','خطأ من الموظف','تأخر الاسترجاع','أخرى'];
+const SEASONS={normal:['عادي',1],ramadan:['رمضان',1.3],hajj:['الحج',1.5],holiday:['الإجازات',1.15]};
+
+const MODULES=[
+  {id:'ops',n:'لوحة العمليات',g:'العمليات'},
+  {id:'disrupt',n:'الأعطال والتنبيهات',g:'العمليات'},
+  {id:'stations',n:'أدوات المحطات',g:'العمليات'},
+  {id:'orders',n:'الطلبات والحجوزات',g:'المبيعات'},
+  {id:'inventory',n:'المخزون والجدول',g:'المبيعات'},
+  {id:'fares',n:'الأسعار والعروض',g:'المبيعات'},
+  {id:'cs',n:'خدمة العملاء',g:'الخدمة'},
+  {id:'notify',n:'الإشعارات',g:'الخدمة'},
+  {id:'partners',n:'الشركاء والتوصيل',g:'الشركاء'},
+  {id:'onboard',n:'الخدمات داخل القطار',g:'الشركاء'},
+  {id:'cargo',n:'الشحن',g:'الشركاء'},
+  {id:'payments',n:'المدفوعات والاسترجاع',g:'المالية'},
+  {id:'settle',n:'التسويات',g:'المالية'},
+  {id:'iam',n:'المستخدمين والصلاحيات',g:'الإدارة'},
+  {id:'reports',n:'التقارير',g:'الإدارة'},
+  {id:'audit',n:'سجل التدقيق',g:'الإدارة'}
+];
+const ROLES={
+  admin:{n:'مدير النظام',mods:'*',scope:'ALL',goodwill:Infinity,refund:true,editInv:true,editFares:true,comp:true,finance:true,count:15},
+  cc:{n:'موظف كول سنتر',mods:['orders','cs','notify'],scope:'ALL',goodwill:200,refund:true,count:420},
+  ccsup:{n:'مشرف كول سنتر',mods:['ops','disrupt','orders','cs','notify','reports'],scope:'ALL',goodwill:1000,refund:true,comp:true,count:35},
+  stSAR:{n:'موظف محطة (سار)',mods:['stations','orders','cargo'],scope:'SAR',goodwill:0,count:210},
+  stHHR:{n:'موظف محطة (الحرمين)',mods:['stations','orders'],scope:'HHR',goodwill:0,count:190},
+  ops:{n:'مركز العمليات',mods:['ops','disrupt','stations','inventory','partners','orders','notify'],scope:'ALL',goodwill:0,comp:true,count:140},
+  crew:{n:'طاقم القطار والتموين',mods:['onboard','stations'],scope:'ALL',goodwill:0,count:75},
+  rev:{n:'إدارة الإيرادات',mods:['inventory','fares','reports','orders'],scope:'ALL',goodwill:0,editInv:true,editFares:true,count:25},
+  fin:{n:'المالية',mods:['payments','settle','reports','orders','audit'],scope:'ALL',goodwill:0,refund:true,finance:true,count:60},
+  partner:{n:'إدارة الشراكات',mods:['partners','onboard','cargo','settle','reports'],scope:'ALL',goodwill:0,count:30}
+};
+const role=()=>ROLES[S.role];
+const can=f=>!!role()[f];
+const scopeOk=op=>role().scope==='ALL'||role().scope===op;
+const modAllowed=id=>{const m=role().mods;return m==='*'||m.includes(id);};
+const firstAllowed=()=>(MODULES.find(m=>modAllowed(m.id))||{id:'orders'}).id;
+
+/* ================= state ================= */
+const S={
+  role:'admin',route:'ops',drawer:null,draft:{},introHidden:false,
+  rate:{HHR:1.35,EAST:0.6,NORTH:0.42},mult:{ECO:1,BUS:1.9,SAV:0.75,SEC:1,SBU:1.8,SBP:2.4,CAB:3.2,CAP:4.2},season:'normal',trainShare:.07,
+  audit:[],adj:[],adjBy:{},notifs:[],disruptions:[],boarded:new Set(),bags:{},prmDone:new Set(),catering:{},settle:{},recon:{},
+  promos:[],cases:[],cars:[],parcels:[],users:[],
+  ui:{
+    ops:{line:''},
+    orders:{q:'',line:'',status:'',ch:'',day:'',rides:false,trip:'',page:1},
+    inventory:{day:'0',line:''},
+    stations:{st:'',trip:'',tab:'board',q:'',page:1},
+    cs:{q:'',type:'',status:'open',page:1},
+    partners:{p:'',status:'',page:1},
+    payments:{tab:'tx',type:'',page:1},
+    fares:{line:'HHR',cls:'ECO'},
+    onboard:{trip:''},
+    cargo:{tab:'cars'},
+    reports:{},
+    notify:{page:1},
+    audit:{page:1},
+    iam:{page:1},
+    disrupt:{type:'delay',trip:'',mins:150,reason:REASONS[0],order:''}
+  }
+};
+let adjSeq=5000,caseSeq=8800;
+
+function fare(line,from,to,cls,season){const L=LINES[line];const m=Math.abs(L.mins[L.stops.indexOf(to)]-L.mins[L.stops.indexOf(from)]);const f=m*S.rate[line]*S.mult[cls]*SEASONS[season||S.season][1];return Math.max(25,Math.round(f/5)*5);}
+
+/* ================= trips ================= */
+const TRIPS=[],TRIP={},BY_TRIP={};
+function addTrip(line,dir,d,startMin,i){
+  const L=LINES[line],total=L.mins[L.mins.length-1];
+  const stops=dir?L.stops.slice().reverse():L.stops.slice();
+  const mins=dir?L.mins.slice().reverse().map(x=>total-x):L.mins.slice();
+  const dep=DAY0+d*DAYMS+startMin*MIN;
+  const no=(line==='HHR'?'HHR ':line==='EAST'?'E-':'N-')+((line==='HHR'?1100:line==='EAST'?300:100)+i*2+1+dir);
+  const t={id:no.replace(/\s/g,'')+'_'+d,no,line,dir,d,stops,times:mins.map(x=>dep+x*MIN),dep,arr:dep+total*MIN,delay:0,cancelled:false,cap:Object.assign({},CAPS[line]),sold:{},blocked:{},quota:{},soldCh:{},platform:ri(1,line==='HHR'?6:3)};
+  for(const c in t.cap){t.sold[c]=0;t.blocked[c]=0;}
+  const capTot=sumObj(t.cap),qp=QUOTA_PCT[L.op];
+  for(const ch in qp){t.quota[ch]=Math.round(capTot*qp[ch]);t.soldCh[ch]=0;}
+  TRIPS.push(t);TRIP[t.id]=t;BY_TRIP[t.id]=[];
+}
+for(let d=0;d<3;d++){
+  for(let i=0;i<12;i++){addTrip('HHR',0,d,360+i*75,i);addTrip('HHR',1,d,330+i*75,i);}
+  [360,540,750,960,1170].forEach((m,i)=>{addTrip('EAST',0,d,m,i);addTrip('EAST',1,d,m+30,i);});
+  [420,1260].forEach((m,i)=>{addTrip('NORTH',0,d,m,i);addTrip('NORTH',1,d,m+60,i);});
+}
+TRIPS.sort((a,b)=>a.dep-b.dep);
+TRIPS.forEach(t=>{if(t.d===0&&t.dep<NOW()){const r=rnd();t.delay=r<.84?0:r<.95?ri(3,12):ri(15,35);}});
+const opOf=t=>LINES[t.line].op;
+const stopIdx=(t,s)=>t.stops.indexOf(s);
+const stopTime=(t,s)=>t.times[stopIdx(t,s)];
+const avail=(t,c)=>t.cap[c]-t.sold[c]-t.blocked[c];
+function tripState(t){if(t.cancelled)return 'CXL';const dep=t.dep+t.delay*MIN,arr=t.arr+t.delay*MIN,n=NOW();if(n<dep-30*MIN)return t.delay>0?'DELAYED':'SCHED';if(n<dep)return t.delay>0?'DELAYED':'BOARDING';if(n<arr)return 'RUNNING';return 'ARRIVED';}
+const TRIP_ST={SCHED:['مجدولة','neutral'],BOARDING:['الصعود','info'],DELAYED:['متأخرة','warn'],RUNNING:['في الطريق','accent'],ARRIVED:['وصلت','ok'],CXL:['ملغاة','bad']};
+
+/* ================= orders ================= */
+const ORDERS=[],ORDER={};let oseq=104210;
+const plate=()=>`${pick(PL)} ${pick(PL)} ${pick(PL)} ${ri(1000,9999)}`;
+function rideLeg(p,kind,time,st){const price=p==='BUS'?15:p==='JEENY'?ri(7,18)*5:ri(6,16)*5;return {type:'ride',kind,partner:p,t:time,addr:'حي '+pick(CITY[st]).replace(/^حي /,''),st,price,ref:PARTNERS[p].ref+ri(100000,999999),driver:p==='BUS'?'حافلة رقم '+ri(10,99):pick(MALE)+' '+pick(FAM),plate:p==='BUS'?'':plate(),fail:false,resched:false,cxl:false};}
+function rentalLeg(time,st){const days=ri(1,4);return {type:'rental',partner:'TELGANI',kind:'last',t:time,st,days,car:pick(CARS),price:days*ri(36,64)*5,ref:'TLG-'+ri(100000,999999),cxl:false,resched:false};}
+function mealLeg(n){const items=[];const k=ri(1,Math.min(3,n+1));for(let i=0;i<k;i++){const m=MENU[ri(0,8)];const ex=items.find(x=>x.id===m.id);if(ex)ex.q++;else items.push({id:m.id,q:1});}if(chance(.15))items.push({id:pick(['m9','m10']),q:1});return {type:'meal',items,price:sumBy(items,x=>MENU_BY[x.id].price*x.q),ref:'CAT-'+ri(10000,99999)};}
+function extraLeg(n,cls){const items=[];if(chance(.8))items.push({k:'bag',n:'شنطة إضافية',q:ri(1,2),p:50});if(['SBU','SBP','CAB','CAP'].includes(cls)&&chance(.5))items.push({k:'lounge',n:'دخول الصالة',q:n,p:75});if(!items.length)items.push({k:'bag',n:'شنطة إضافية',q:1,p:50});return {type:'extra',items,price:sumBy(items,x=>x.q*x.p)};}
+function makeOrder(t,ch,n,cls){
+  const op=opOf(t);let a,b;const k=t.stops.length;
+  if(ch==='SAUDIA'){const ki=stopIdx(t,'KAIA');if(chance(.5)){a=ki;b=k-1;}else{a=0;b=ki;}}
+  else if(chance(.5)){a=0;b=k-1;}else{a=ri(0,k-2);b=ri(a+1,k-1);}
+  const from=t.stops[a],to=t.stops[b],dep=t.times[a],arr=t.times[b];
+  const intl=(ch==='NUSUK'||ch==='SAUDIA')?chance(.7):(op==='HHR'?chance(.15):chance(.03));
+  const name=intl?pick(INTL):(chance(.62)?pick(MALE):pick(FEMALE))+' '+pick(FAM);
+  let created=Math.min(NOW()-ri(2,600)*MIN,dep-ri(40,180)*MIN);
+  if(ch==='STATION')created=Math.min(NOW()-ri(1,30)*MIN,dep-ri(20,240)*MIN);
+  else created-=chance(.6)?ri(0,10)*DAYMS+ri(0,23)*HOUR:ri(0,36)*HOUR;
+  const masi=ch==='APP'||ch==='WEB',f=fare(t.line,from,to,cls),legs=[];
+  if(masi&&chance(.5)){const p=from==='MKK'&&chance(.3)?'BUS':(chance(.6)?'JEENY':'TAXA');legs.push(rideLeg(p,'first',dep-ri(55,95)*MIN,from));}
+  legs.push({type:'train',trip:t.id,cls,from,to,fare:f,price:f*n,pnr:(op==='HHR'?'IND-':'SAR-')+code(6),seat:t.sold[cls]});
+  if(masi){if(chance(.08))legs.push(rentalLeg(arr+15*MIN,to));else if(chance(.4))legs.push(rideLeg(chance(.6)?'JEENY':'TAXA','last',arr+ri(8,15)*MIN,to));}
+  if(masi&&chance(.35))legs.push(mealLeg(n));
+  if(op==='SAR'&&chance(.22))legs.push(extraLeg(n,cls));
+  legs.forEach(l=>{if(l.type==='ride'&&l.kind==='first')l.lead=dep-l.t;else if(l.type==='ride'||l.type==='rental')l.lag=l.t-arr;});
+  const o={id:'M-'+(oseq++),name,intl,phone:'05'+ri(0,9)+ri(1000000,9999999),nid:(intl?'P':chance(.5)?'1':'2')+ri(100000000,999999999),ch,pax:n,created,st:'CONF',pm:masi?wpick(PM):ch==='STATION'?wpick([['شبكة',70],['نقدي',30]]):'تسوية مع '+CH[ch],legs,total:sumBy(legs,l=>l.price),prm:chance(.025)?pick(PRM):null,h:[]};
+  t.sold[cls]+=n;t.soldCh[ch]=(t.soldCh[ch]||0)+n;
+  ORDERS.push(o);ORDER[o.id]=o;BY_TRIP[t.id].push(o);
+  return o;
+}
+for(const t of TRIPS){
+  const op=opOf(t),capTot=sumObj(t.cap);
+  const lf=(op==='HHR'?.6+rnd()*.32:.45+rnd()*.4)*(t.d===0?1:t.d===1?.62:.35);
+  const target=Math.round(capTot*lf);let pax=0,guard=0;
+  while(pax<target&&guard++<700){
+    const ch=wpick(CH_W[op]);
+    const n=ch==='GROUP'?ri(10,22):wpick([[1,44],[2,30],[3,12],[4,9],[5,5]]);
+    let cls=ch==='GROUP'?(t.line==='HHR'?'ECO':'SEC'):wpick(CLS_W[t.line]);
+    if(t.sold[cls]+n>t.cap[cls]){cls=Object.keys(t.cap).find(c=>t.sold[c]+n<=t.cap[c]);if(!cls)break;}
+    makeOrder(t,ch,n,cls);pax+=n;
+  }
+}
+const trainLeg=o=>o.legs.find(l=>l.type==='train');
+const oTrip=o=>TRIP[trainLeg(o).trip];
+const ORDERS_DESC=ORDERS.slice().sort((a,b)=>b.created-a.created);
+const O_ST={HOLD:['معلّق الدفع','warn'],CONF:['مؤكد','info'],ONBOARD:['في الرحلة','accent'],DONE:['مكتمل','ok'],NOSHOW:['لم يحضر','neutral'],CXL:['ملغي','bad'],EXP:['انتهت المهلة','neutral'],MISSED:['فاته القطار','bad']};
+function oStatus(o){if(o.st!=='CONF')return o.st;const tl=trainLeg(o);if(tl.missed)return 'MISSED';const t=TRIP[tl.trip],s=tripState(t);if(s==='CXL')return 'CONF';const n=NOW(),dep=stopTime(t,tl.from)+t.delay*MIN,arr=stopTime(t,tl.to)+t.delay*MIN;if(n>=arr)return 'DONE';if(n>=dep)return 'ONBOARD';return 'CONF';}
+function legPayee(l,op){return l.type==='train'||l.type==='extra'?op:l.type==='meal'?'CATER':l.partner;}
+function addAdj(a){a.id='A-'+(++adjSeq);a.t=a.t||NOW();a.status=a.status||'pending';S.adj.push(a);if(a.order)(S.adjBy[a.order]||(S.adjBy[a.order]=[])).push(a);return a;}
+const hist=(o,by,m,t)=>o.h.push({t:t||NOW(),by,m});
+function rideState(l,o){if(o.st==='CXL'||o.st==='EXP'||l.cxl)return 'CXL';if(l.fail)return 'FAILED';const n=NOW();if(n<l.t-20*MIN)return 'SCHED';if(n<l.t)return 'ASSIGNED';if(n<l.t+35*MIN)return 'ENROUTE';return 'DONE';}
+const RIDE_ST={SCHED:['مجدولة','neutral'],ASSIGNED:['تم تعيين السائق','info'],ENROUTE:['في الطريق','accent'],DONE:['اكتملت','ok'],FAILED:['فشلت','bad'],CXL:['ملغاة','neutral']};
+
+/* post-generation states */
+(function(){
+  const n=NOW();
+  ORDERS.forEach(o=>{
+    const tl=trainLeg(o),t=TRIP[tl.trip];
+    if(chance(.03)){
+      const ct=Math.min(n-ri(5,300)*MIN,o.created+ri(1,48)*HOUR,stopTime(t,tl.from)-30*MIN);
+      if(ct>o.created){
+        o.st='CXL';t.sold[tl.cls]-=o.pax;t.soldCh[o.ch]-=o.pax;
+        const split={};let refund=0;
+        o.legs.forEach(l=>{const r=l.type==='extra'?0:r2(l.price*(l.type==='train'?.8:1));const p=legPayee(l,opOf(t));split[p]=(split[p]||0)+r;refund+=r;if(l.type==='ride'||l.type==='rental')l.cxl=true;});
+        addAdj({kind:'refund',order:o.id,amount:r2(refund),split,payer:'MASI',status:n-ct>2*DAYMS?'paid':'pending',t:ct,note:'إلغاء من العميل'});
+        hist(o,'العميل','ألغى الطلب من التطبيق',ct);
+        return;
+      }
+    }
+    if(t.d===0&&t.arr+t.delay*MIN<n&&chance(.03)){o.st='NOSHOW';return;}
+    const r=o.legs[0];
+    if(r.type==='ride'&&t.d===0&&r.t<n-40*MIN&&chance(.012)){r.fail=true;r.failMins=ri(25,55);}
+  });
+  const tomorrow=ORDERS.filter(o=>o.ch==='APP'&&o.st==='CONF'&&TRIP[trainLeg(o).trip].d===1);
+  for(let i=0;i<10&&tomorrow.length;i++){const o=tomorrow.splice(ri(0,tomorrow.length-1),1)[0];o.st='HOLD';o.holdUntil=n+ri(70,840)*1000;o.created=n-(900*1000-(o.holdUntil-n));}
+})();
+
+/* cases */
+const AGENTS=['ريم الشهري','عبدالعزيز المطيري','هند العتيبي','ماجد الحربي','لمى القحطاني','فهد الدوسري'];
+const CASE_T={
+  'استفسار':{sla:4,msg:['وش أقصى وزن للشنطة في الاقتصادي؟','هل أقدر أحجز لطفل عمره سنتين بدون مقعد؟','وين ألقى رقم العربة في التذكرة؟']},
+  'تعديل':{sla:8,msg:['أبي أقدّم رحلتي لوقت أبكر','أبي أغير اسم الراكب الثاني','أبي أضيف شنطة لحجزي']},
+  'استرجاع':{sla:24,msg:['ألغيت الحجز من أربع أيام وما وصلني المبلغ','انخصم مني المبلغ مرتين']},
+  'مطالبة':{sla:72,msg:['القطار تأخر وما جاني تعويض','السائق ما جاء وفاتني القطار']},
+  'شكوى':{sla:72,msg:['المكيف في العربة 4 ما كان شغال','الوجبة اللي طلبتها ما وصلت للمقعد','ما انبلغت بالتأخير إلا وأنا في المحطة']},
+  'مفقودات':{sla:48,msg:['نسيت شنطة لابتوب سوداء تحت المقعد','ضاعت محفظة بنية في صالة الانتظار']},
+  'مساعدة خاصة':{sla:24,msg:['والدي يحتاج كرسي متحرك في المحطة','أحتاج مساعدة في الصعود مع طفلين وعربة']}
+};
+function newCase(type,o,created,msg,chn){
+  const c={id:'C-'+(caseSeq++),type,order:o?o.id:null,name:o?o.name:'',ch:chn||pick(['تطبيق','هاتف','موقع']),pri:type==='مطالبة'||type==='مساعدة خاصة'?'عالية':type==='شكوى'?'متوسطة':pick(['متوسطة','منخفضة']),created,sla:CASE_T[type].sla,agent:null,st:'open',esc:null,res:'',msgs:[{by:'العميل',t:created,m:msg||pick(CASE_T[type].msg)}]};
+  S.cases.unshift(c);return c;
+}
+(function(){
+  const pool=ORDERS.filter(o=>TRIP[trainLeg(o).trip].d<=1&&o.st!=='HOLD');
+  for(let i=0;i<58;i++){
+    const type=wpick([['استفسار',20],['تعديل',14],['استرجاع',12],['مطالبة',8],['شكوى',12],['مفقودات',5],['مساعدة خاصة',6]]);
+    const o=pick(pool),created=NOW()-ri(5,58*60)*MIN;
+    const c=newCase(type,o,created);
+    const left=created+c.sla*HOUR-NOW();
+    if(left<0&&chance(.75)){c.st='resolved';c.agent=pick(AGENTS);c.res='تم التواصل مع العميل وحل الطلب';c.msgs.push({by:c.agent,t:created+ri(30,c.sla*60)*MIN,m:'أهلاً، تم حل طلبك. شكراً لصبرك.'});}
+    else {c.st=wpick([['open',45],['progress',40],['escalated',15]]);if(c.st!=='open'){c.agent=pick(AGENTS);c.msgs.push({by:c.agent,t:created+ri(5,40)*MIN,m:'أهلاً، استلمنا طلبك ونشتغل عليه.'});}if(c.st==='escalated')c.esc=opOf(TRIP[trainLeg(o).trip]);}
+  }
+  ORDERS.forEach(o=>{const r=o.legs[0];if(r.type==='ride'&&r.fail){const c=newCase('مطالبة',o,r.t+40*MIN,`سائق ${PARTNERS[r.partner].n} تأخر ${r.failMins} دقيقة وفاتني القطار`,'تطبيق');c.pri='عالية';}});
+  S.cases.sort((a,b)=>b.created-a.created);
+})();
+
+/* goodwill, chargebacks */
+(function(){
+  const pool=ORDERS.filter(o=>o.st==='CONF'||o.st==='NOSHOW');
+  for(let i=0;i<9;i++){const o=pick(pool);addAdj({kind:'goodwill',order:o.id,amount:ri(5,30)*5,payer:'MASI',status:chance(.6)?'paid':'pending',t:NOW()-ri(60,3000)*MIN,note:pick(GW_REASONS)});}
+  for(let i=0;i<3;i++){const o=pick(pool.filter(x=>x.ch==='APP'));addAdj({kind:'chargeback',order:o.id,amount:o.total,payer:'MASI',status:'open',t:NOW()-ri(1,4)*DAYMS,note:pick(['العميل ينكر العملية','عملية مكررة حسب البنك','الخدمة لم تقدّم حسب العميل'])});}
+})();
+
+/* cargo */
+(function(){
+  const north=TRIPS.filter(t=>t.line==='NORTH'&&t.d<=1);
+  const OWN=()=>pick(MALE)+' '+pick(FAM);
+  const MAKES=['تويوتا لاندكروزر','هيونداي أكسنت','نيسان باترول','لكزس ES','فورد تورس','تويوتا كامري','جي إم سي يوكن'];
+  for(let i=0;i<14;i++){const t=pick(north);const s=tripState(t);const st=s==='ARRIVED'?ri(4,5):s==='RUNNING'?3:ri(0,2);S.cars.push({id:'CAR-'+ri(1000,9999),trip:t.id,from:t.stops[0],to:t.stops.at(-1),owner:OWN(),make:pick(MAKES),plate:plate(),st,withOwner:chance(.6),price:ri(9,13)*50,damage:i===3});}
+  const sar=Object.keys(ST).filter(s=>ST_OP[s]==='SAR');
+  for(let i=0;i<22;i++){let a=pick(sar),b=pick(sar);if(a===b)b=sar[(sar.indexOf(a)+3)%sar.length];S.parcels.push({id:'PCL-'+ri(10000,99999),from:a,to:b,w:ri(1,30),sender:OWN(),receiver:OWN(),st:ri(0,5),price:ri(3,18)*5,t:NOW()-ri(1,72)*HOUR});}
+})();
+const CAR_ST=['بانتظار الاستلام','تم الاستلام والفحص','محمّلة على القطار','في الطريق','وصلت','تم التسليم'];
+const PCL_ST=['تم الاستلام','في المستودع','محمّل على القطار','وصل','جاهز للاستلام','تم التسليم'];
+
+/* promos, users, notifs, audit */
+S.promos=[
+  {code:'HAIL25',d:'25٪ على قطار الشمال',scope:'قطار الشمال',used:312,limit:1000,until:'نهاية الشهر',on:true},
+  {code:'FIRSTRIDE',d:'أول توصيلة مجانية حتى 40 ر.س',scope:'التوصيلات',used:1840,limit:5000,until:'31 ديسمبر',on:true},
+  {code:'UMRAH10',d:'10٪ على الحرمين للمعتمرين',scope:'قطار الحرمين',used:9230,limit:20000,until:'نهاية الموسم',on:true},
+  {code:'FAMILY4',d:'الراكب الرابع مجاناً',scope:'كل الخطوط',used:640,limit:2000,until:'نهاية الإجازة',on:false},
+  {code:'EASTWKND',d:'15٪ على قطار الشرق نهاية الأسبوع',scope:'قطار الشرق',used:1205,limit:3000,until:'مفتوح',on:true}
+];
+(function(){
+  const rk=Object.keys(ROLES);
+  for(let i=0;i<40;i++){const r=i<rk.length?rk[i]:wpick(rk.map(k=>[k,ROLES[k].count]));const sc=ROLES[r].scope;const org=r==='admin'||r==='fin'||r==='rev'||r==='partner'||r==='cc'||r==='ccsup'?'ماسي':sc==='HHR'?'الحرمين':sc==='SAR'?'سار':pick(['ماسي','سار','الحرمين']);const stn=r==='stSAR'?pick(['RYE','RYN','DMM','HAS','QSM','HOF']):r==='stHHR'?pick(['MKK','JED','KAIA','MED','KAEC']):null;S.users.push({id:'U-'+(2000+i),name:(chance(.6)?pick(MALE):pick(FEMALE))+' '+pick(FAM),role:r,org,stn,last:NOW()-ri(1,4000)*MIN,mfa:chance(.85),on:chance(.95)});}
+})();
+const TEMPLATES=[
+  {id:'confirm',n:'تأكيد الحجز',ch:'SMS · إشعار · إيميل',ar:'تم تأكيد حجزك {order} على رحلة {trip} من {from} إلى {to}، المغادرة {time}. تذكرتك في التطبيق.',en:'Your booking {order} on {trip} from {from} to {to} is confirmed. Departs {time}.'},
+  {id:'remind',n:'تذكير قبل الرحلة',ch:'إشعار',ar:'رحلتك {trip} تغادر بعد 3 ساعات من {from}. توصيلتك مع {partner} توصل {pickup}.',en:'Your train {trip} leaves {from} in 3 hours. Your {partner} ride arrives at {pickup}.'},
+  {id:'delay',n:'تنبيه تأخير',ch:'SMS · إشعار',ar:'نعتذر، رحلة {trip} متأخرة {mins} دقيقة. الموعد الجديد {time}، وعدّلنا موعد توصيلتك.',en:'Sorry, {trip} is delayed {mins} minutes. New time {time}. Your ride has been moved.'},
+  {id:'cancel',n:'إلغاء رحلة',ch:'SMS · إشعار · إيميل',ar:'نعتذر، أُلغيت رحلة {trip}. حجزنا لك على {newtrip}، أو تقدر تسترد المبلغ كامل من التطبيق.',en:'Sorry, {trip} is cancelled. We moved you to {newtrip}, or you can get a full refund in the app.'},
+  {id:'ride',n:'تغيير موعد التوصيلة',ch:'إشعار',ar:'تغيّر موعد توصيلتك مع {partner} إلى {pickup} بسبب تغيّر موعد رحلتك.',en:'Your {partner} pickup moved to {pickup} because your train time changed.'},
+  {id:'comp',n:'صرف تعويض',ch:'SMS · إيميل',ar:'أضفنا تعويض {amount} بسبب تأخير رحلة {trip}، ويوصلك خلال 14 يوم كحد أقصى.',en:'We issued {amount} compensation for the delay on {trip}. It reaches you within 14 days.'},
+  {id:'meal',n:'قسيمة وجبة',ch:'إشعار',ar:'بسبب التأخير، لك وجبة خفيفة ومشروب مجاناً. اعرض الرمز {code} لطاقم القطار.',en:'Because of the delay, a snack and drink are on us. Show code {code} to the crew.'},
+  {id:'hold',n:'المهلة قربت تنتهي',ch:'إشعار',ar:'باقي 5 دقائق على حجز مقعدك. كمّل الدفع عشان ما يروح.',en:'5 minutes left on your seat hold. Complete payment to keep it.'},
+  {id:'ticket',n:'إعادة إرسال التذكرة',ch:'SMS · إيميل',ar:'هذي تذكرتك لرحلة {trip}، الطلب {order}.',en:'Here is your ticket for {trip}, booking {order}.'}
+];
+const TPL=id=>TEMPLATES.find(x=>x.id===id);
+function notif(tpl,n,ref,t){S.notifs.unshift({t:t||NOW(),tpl,n,ref,st:'تم الإرسال'});}
+function audit(action,target,who){S.audit.unshift({t:NOW(),who:who||role().n,action,target:target||''});}
+(function(){
+  const n=NOW();
+  for(let h=8;h>=1;h--){const c=ORDERS.filter(o=>o.created>n-h*HOUR&&o.created<=n-(h-1)*HOUR).length;if(c)notif('confirm',c,'حجوزات الساعة',n-(h-1)*HOUR-ri(1,10)*MIN);}
+  notif('remind',ri(300,700),'رحلات بعد 3 ساعات',n-ri(5,50)*MIN);
+  audit('تشغيل مزامنة الجداول','إندرا ونظام سار','النظام');
+  audit('اعتماد التسوية الأسبوعية','الحرمين','المالية');
+  audit('تحديث حصص القنوات','HHR 1105','إدارة الإيرادات');
+  S.audit.forEach((a,i)=>a.t=n-(i+1)*ri(20,90)*MIN);
+})();
+/* an earlier resolved disruption today */
+(function(){
+  const t=TRIPS.find(x=>x.d===0&&x.delay>=15&&tripState(x)==='ARRIVED');
+  if(t){const os=(BY_TRIP[t.id]||[]).filter(o=>o.st==='CONF');S.disruptions.push({id:'D-100',t:t.dep-10*MIN,type:'delay',trip:t.id,mins:t.delay,reason:REASONS[4],orders:os.map(o=>o.id),holds:0,done:{notify:true,resched:1},op:opOf(t)});}
+})();
+
+/* ================= rules engine ================= */
+function compTier(m){return m>=240?1:m>=180?.75:m>=120?.5:0;}
+function legName(l){if(l.type==='train')return 'تذكرة القطار';if(l.type==='ride')return (l.kind==='first'?'توصيلة إلى المحطة':'توصيلة من المحطة')+' ('+PARTNERS[l.partner].n+')';if(l.type==='rental')return 'تأجير سيارة (تلقاني)';if(l.type==='meal')return 'وجبات ومتجر';return 'إضافات';}
+function quoteCancel(o,reason){
+  const t=oTrip(o),op=opOf(t),tl=trainLeg(o),n=NOW();
+  const depAt=stopTime(t,tl.from),hrs=(depAt-n)/HOUR;
+  const lines=[];let allowed=true;
+  for(const l of o.legs){
+    let fee=0,note='',src='assume';
+    if(l.cxl){lines.push({l,label:legName(l),paid:l.price,fee:l.price,refund:0,note:'ملغاة سابقاً',payee:legPayee(l,op),src:''});continue;}
+    if(reason==='operator'){note='إلغاء من الناقل: استرداد كامل';src='src';}
+    else if(l.type==='train'){
+      if(op==='HHR'){src='src';
+        if(hrs<1/3){allowed=false;fee=l.price;note='أقل من 20 دقيقة على المغادرة: ممنوع، والتذكرة تضيع';}
+        else if(tl.cls==='ECO'){if(hrs>24){fee=l.price*.2;note='اقتصادي، أكثر من 24 ساعة: رسوم 20٪';}else{fee=l.price*.5;note='اقتصادي، أقل من 24 ساعة: رسوم 50٪';}}
+        else{if(hrs>24){note='أعمال، أكثر من 24 ساعة: مجاني';}else{fee=l.price*.35;note='أعمال، أقل من 24 ساعة: رسوم 35٪';}}
+      }else{
+        if(hrs<-24){allowed=false;fee=l.price;note='مضى أكثر من 24 ساعة على الرحلة';src='src';}
+        else if(tl.cls==='SAV'){fee=l.price;note='اقتصادي موفّر: غير مسترد';}
+        else if(hrs>=24){const r=tl.cls==='SEC'?.15:.10;fee=l.price*r;note=`أكثر من 24 ساعة: رسوم ${r*100}٪`;}
+        else{fee=l.price*.5;note='أقل من 24 ساعة: سعر عدم الحضور 50٪';}
+      }
+    }else if(l.type==='ride'){
+      const rs=rideState(l,o);
+      if(l.fail){note='التوصيلة فشلت: استرداد كامل';}
+      else if(rs==='DONE'||rs==='ENROUTE'){fee=l.price;note='التوصيلة بدأت أو انتهت';}
+      else if(l.t-n<HOUR){fee=15;note='أقل من ساعة على الموعد: رسوم 15 ر.س';}
+      else note='أكثر من ساعة على الموعد: مجاني';
+    }else if(l.type==='rental'){if(l.t-n>24*HOUR)note='أكثر من 24 ساعة: مجاني';else{fee=l.price*.25;note='أقل من 24 ساعة: رسوم 25٪';}}
+    else if(l.type==='meal'){if(hrs>3)note='أكثر من 3 ساعات قبل الرحلة: مجاني';else{fee=l.price;note='التموين جهّز الطلب: غير مسترد';}}
+    else if(l.type==='extra'){fee=l.price;note='الإضافات المدفوعة مسبقاً غير مستردة';src=op==='SAR'?'src':'assume';}
+    fee=Math.min(l.price,r2(fee));
+    lines.push({l,label:legName(l),paid:l.price,fee,refund:r2(l.price-fee),note,payee:legPayee(l,op),src});
+  }
+  return {lines,allowed,total:r2(sumBy(lines,x=>x.refund)),hrs};
+}
+function changeFee(o,hrs){const tl=trainLeg(o),op=opOf(oTrip(o));if(op==='HHR'){if(hrs<1/3)return null;if(tl.cls==='ECO')return r2(tl.price*(hrs>24?.1:.2));return hrs>24?0:r2(tl.price*.1);}if(hrs<1)return null;return tl.cls==='SAV'?50:0;}
+function releaseSeats(o){const tl=trainLeg(o),t=TRIP[tl.trip];t.sold[tl.cls]=Math.max(0,t.sold[tl.cls]-o.pax);t.soldCh[o.ch]=Math.max(0,(t.soldCh[o.ch]||0)-o.pax);}
+function moveOrder(o,nt){const tl=trainLeg(o),t=TRIP[tl.trip];releaseSeats(o);BY_TRIP[t.id]=BY_TRIP[t.id].filter(x=>x!==o);const delta=stopTime(nt,tl.from)-stopTime(t,tl.from);tl.seat=nt.sold[tl.cls];nt.sold[tl.cls]+=o.pax;nt.soldCh[o.ch]=(nt.soldCh[o.ch]||0)+o.pax;tl.trip=nt.id;tl.missed=false;BY_TRIP[nt.id].push(o);return delta;}
+function anchorRides(o,onlyFuture){const tl=trainLeg(o),t=TRIP[tl.trip];const dep=stopTime(t,tl.from)+t.delay*MIN,arr=stopTime(t,tl.to)+t.delay*MIN;let c=0;o.legs.forEach(l=>{if((l.type!=='ride'&&l.type!=='rental')||l.cxl||l.fail)return;if(onlyFuture&&l.t<=NOW())return;const nt=l.kind==='first'?dep-(l.lead||60*MIN):arr+(l.lag||10*MIN);if(nt!==l.t){l.t=nt;l.resched=true;c++;}});return c;}
+function altTrips(o,minLead){const tl=trainLeg(o),t=oTrip(o);return TRIPS.filter(x=>x.id!==t.id&&x.line===t.line&&x.dir===t.dir&&!x.cancelled&&stopTime(x,tl.from)-NOW()>minLead&&avail(x,tl.cls)>=o.pax);}
+function seatLabel(t,cls,idx){let base=0;for(const c of Object.keys(t.cap)){if(c===cls)break;base+=Math.ceil(t.cap[c]/PER_COACH[c]);}const per=PER_COACH[cls];return 'عربة '+(base+1+Math.floor(idx/per))+'، مقعد '+(idx%per+1);}
+function paxName(o,i){if(i===0)return o.name;const h=hashStr(o.id+':'+i);if(o.intl)return INTL[h%INTL.length];const fem=h%3===0;return (fem?FEMALE[h%FEMALE.length]:MALE[h%MALE.length])+' '+o.name.split(' ').slice(1).join(' ');}
+const maskPhone=p=>p.slice(0,2)+'•• ••• '+p.slice(-4);
+const maskId=s=>s.slice(0,1)+'•••••'+s.slice(-4);
+const slaLeft=c=>c.created+c.sla*HOUR-NOW();
+const adjOf=o=>S.adjBy[o.id]||[];
+
+/* ================= UI helpers ================= */
+const badge=(t,tone)=>`<span class="badge ${tone||''}">${esc(t)}</span>`;
+const lineChip=l=>`<span class="lchip ${l}">${LINES[l].n}</span>`;
+const tripBadge=t=>{const s=tripState(t),[l,tone]=TRIP_ST[s];return badge(l+(t.delay>0&&!t.cancelled&&s!=='ARRIVED'?' '+t.delay+' د':''),tone);};
+const oBadge=o=>{const [l,tone]=O_ST[oStatus(o)];return badge(l,tone);};
+const rBadge=(l,o)=>{const [x,tone]=RIDE_ST[rideState(l,o)];return badge(x,tone)+(l.resched?' '+badge('أعيدت جدولتها','warn'):'');};
+function timeCell(ms,delay,d){const x=dayOff(ms)>d?' <span class="faint xs">+1</span>':'';return delay?`<s>${hhmm(ms)}</s> <span class="warn-t">${hhmm(ms+delay*MIN)}</span>${x}`:hhmm(ms)+x;}
+function kpis(arr){return `<div class="kpis">${arr.map(k=>`<div class="kpi ${k.tone||''}"><div class="kpi-l">${esc(k.l)}</div><div class="kpi-v">${k.v}</div>${k.s?`<div class="kpi-s">${k.s}</div>`:''}</div>`).join('')}</div>`;}
+const page=(title,sub,act)=>`<div class="ph"><div><h1>${esc(title)}</h1>${sub?`<p class="sub">${sub}</p>`:''}</div>${act?`<div class="ph-act">${act}</div>`:''}</div>`;
+const card=(title,body,extra,cls)=>`<section class="card ${cls||''}">${title?`<div class="card-h"><h3>${title}</h3>${extra||''}</div>`:''}${body}</section>`;
+function table(cols,rows,opts){opts=opts||{};if(!rows.length)return `<div class="empty">${opts.empty||'ما فيه نتائج'}</div>`;return `<div class="tbl"><table><thead><tr>${cols.map(c=>`<th class="${c.c||''}">${c.h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr ${opts.row?opts.row(r):''}>${cols.map(c=>`<td class="${c.c||''}">${c.f(r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;}
+function paginate(arr,key,size){size=size||25;const u=S.ui[key];const pages=Math.max(1,Math.ceil(arr.length/size));if(u.page>pages)u.page=pages;if(u.page<1)u.page=1;const p=u.page;return {rows:arr.slice((p-1)*size,p*size),html:`<div class="pager"><span>${num(arr.length)} سجل</span>${pages>1?`<span class="row"><button class="btn sm" data-action="page" data-key="${key}" data-p="${p-1}" ${p<=1?'disabled':''}>السابق</button><span>${p} من ${pages}</span><button class="btn sm" data-action="page" data-key="${key}" data-p="${p+1}" ${p>=pages?'disabled':''}>التالي</button></span>`:''}</div>`};}
+function sel(path,options,val,attrs){return `<select data-bind="${path}" ${attrs||''}>${options.map(([v,l])=>`<option value="${esc(v)}" ${String(v)===String(val)?'selected':''}>${esc(l)}</option>`).join('')}</select>`;}
+function chips(path,options,val){return `<div class="chips">${options.map(([v,l])=>`<button class="chip ${String(v)===String(val)?'on':''}" data-action="set" data-path="${path}" data-v="${esc(v)}">${esc(l)}</button>`).join('')}</div>`;}
+function loadBar(p){const pct=Math.round(p*100),tone=p>.92?'bad':p>.78?'warn':'ok';return `<div class="lbar"><div class="track"><div class="fill ${tone}" style="width:${Math.min(100,pct)}%"></div></div><span>${pct}٪</span></div>`;}
+function legChips(o){return `<span class="legs">${o.legs.map(l=>`<i class="lg ${l.type==='ride'?PARTNERS[l.partner].cls:l.type}" title="${esc(legName(l))}"></i>`).join('')}</span>`;}
+function bars(items,fmt){const max=Math.max(1,...items.map(i=>i.v));return `<div class="bars">${items.map(i=>`<div class="barrow"><span>${esc(i.l)}</span><div class="track"><div class="fill ${i.tone||'acc'}" style="width:${i.v/max*100}%"></div></div><b class="xs">${fmt?fmt(i.v):num(i.v)}</b></div>`).join('')}</div>`;}
+const routeOf=t=>`${ST[t.stops[0]]} ← ${ST[t.stops.at(-1)]}`;
+const tripLabel=t=>`${t.no} · ${routeOf(t)} · ${dt(t.dep)}`;
+function toast(m,tone){const box=$('#toasts');while(box.children.length>=2)box.firstChild.remove();const el=document.createElement('div');el.className='toast '+(tone||'');el.textContent=m;box.appendChild(el);setTimeout(()=>el.remove(),2800);}
+const legendHtml=`<div class="legend"><span><i class="lg ride"></i>توصيل</span><span><i class="lg taxi"></i>تاكسي</span><span><i class="lg train"></i>قطار</span><span><i class="lg rental"></i>تأجير</span><span><i class="lg meal"></i>وجبات</span><span><i class="lg extra"></i>إضافات</span></div>`;
+
+/* ================= VIEWS ================= */
+const V={};
+
+V.ops=function(){
+  const u=S.ui.ops,n=NOW();
+  const today=TRIPS.filter(t=>t.d===0&&scopeOk(opOf(t)));
+  const list=today.filter(t=>!u.line||t.line===u.line);
+  const dep=today.filter(t=>{const s=tripState(t);return s==='RUNNING'||s==='ARRIVED';});
+  const onTime=dep.length?Math.round(dep.filter(t=>t.delay<=5).length/dep.length*1000)/10:100;
+  const running=today.filter(t=>tripState(t)==='RUNNING').length;
+  const pax=sumBy(today,t=>sumObj(t.sold));
+  const open=S.cases.filter(c=>c.st!=='resolved'),breached=open.filter(c=>slaLeft(c)<0).length;
+  const failed=ridesToday().filter(r=>rideState(r.l,r.o)==='FAILED').length;
+  const activeD=S.disruptions.filter(d=>!dDone(d)).length;
+  const intro=S.introHidden?'':`<div class="callout"><div class="row between"><b>نموذج تصوري ببيانات وهمية</b><button class="btn sm" data-action="hideIntro">إخفاء</button></div><div class="xs muted">مبني من بحث عام وصفحات موقع ماسي، مو نظام ماسي الفعلي. القواعد الموسومة <span class="src">من المصادر</span> مأخوذة من مصادر منشورة، والموسومة <span class="assume">افتراضي</span> من عندي.</div><ol class="xs"><li>افتح <b>الأعطال والتنبيهات</b> وشغّل تأخير 150 دقيقة على رحلة حرمين، ونفّذ الخطوات وحدة وحدة.</li><li>جرّب السيناريو الثالث هناك: سائق تأخر وفات الراكب القطار. مين يدفع؟</li><li>افتح أي طلب من <b>الطلبات</b> وجرّب الإلغاء والتعديل، والمحرك يحسب حسب قواعد كل ناقل.</li><li>غيّر <b>الدور</b> من فوق إلى موظف محطة سار، وشوف وش يختفي.</li><li>شوف <b>التسويات</b> بعد ما تصرف تعويضات: مين انخصم منه.</li></ol></div>`;
+  return page('لوحة العمليات','حالة اليوم لكل القطارات والتوصيلات والحالات')+intro+
+    kpis([{l:'رحلات اليوم',v:num(today.length),s:running+' في الطريق الآن'},{l:'ركاب اليوم',v:num(pax)},{l:'الالتزام بالمواعيد',v:onTime+'٪',s:'من '+dep.length+' رحلة غادرت',tone:onTime<95?'warn':'ok'},{l:'أعطال نشطة',v:activeD,tone:activeD?'warn':''},{l:'حالات مفتوحة',v:open.length,s:breached+' تجاوزت المدة',tone:breached?'bad':''},{l:'توصيلات فشلت اليوم',v:failed,tone:failed?'bad':''}])+
+    `<div class="grid g2 mb">${card('تنبيهات تحتاج تصرف',alertsHtml())}${card('صحة التكاملات',integHtml(),'<span class="faint xs">تحديث كل 5 ث</span>')}</div>`+
+    card('لوحة الرحلات اليوم',chips('ui.ops.line',[['','الكل'],['HHR','الحرمين'],['EAST','الشرق'],['NORTH','الشمال']],u.line)+'<div class="mt"></div>'+
+    table([
+      {h:'الرحلة',f:t=>`<b class="mono">${t.no}</b> ${lineChip(t.line)}`},
+      {h:'المسار',f:routeOf},
+      {h:'المغادرة',f:t=>timeCell(t.dep,t.delay,t.d)},
+      {h:'الوصول',f:t=>timeCell(t.arr,t.delay,t.d)},
+      {h:'الرصيف',f:t=>t.platform,c:'num'},
+      {h:'الحالة',f:tripBadge},
+      {h:'الامتلاء',f:t=>loadBar(sumObj(t.sold)/sumObj(t.cap))},
+      {h:'طلبات بتوصيلة بعد الوصول',f:t=>num(BY_TRIP[t.id].filter(o=>o.st==='CONF'&&o.legs.some(l=>(l.type==='ride'&&l.kind==='last')||l.type==='rental')).length),c:'num'}
+    ],list,{row:t=>`class="click" data-action="openTrip" data-id="${t.id}"`}));
+};
+function ridesToday(){const out=[];TRIPS.forEach(t=>{if(t.d!==0||!scopeOk(opOf(t)))return;BY_TRIP[t.id].forEach(o=>o.legs.forEach(l=>{if(l.type==='ride'||l.type==='rental')out.push({l,o,t});}));});return out;}
+function alertsHtml(){
+  const items=[],n=NOW();
+  TRIPS.filter(t=>t.d<=1&&scopeOk(opOf(t))&&!t.cancelled&&t.delay>=10&&tripState(t)!=='ARRIVED').forEach(t=>items.push({tone:'warn',m:`رحلة ${t.no} متأخرة ${t.delay} د`,s:`${BY_TRIP[t.id].filter(o=>o.st==='CONF').length} طلب مؤكد · ${routeOf(t)}`,a:`data-action="openTrip" data-id="${t.id}"`}));
+  TRIPS.filter(t=>t.cancelled&&scopeOk(opOf(t))).forEach(t=>items.push({tone:'bad',m:`رحلة ${t.no} ملغاة`,s:routeOf(t),a:`data-action="go" data-r="disrupt"`}));
+  const failed=ridesToday().filter(r=>rideState(r.l,r.o)==='FAILED').length;
+  if(failed)items.push({tone:'bad',m:`${failed} توصيلات فشلت اليوم`,s:'راكب فاته القطار أو وصل متأخر',a:`data-action="goF" data-r="partners" data-path="ui.partners.status" data-v="FAILED"`});
+  const br=S.cases.filter(c=>c.st!=='resolved'&&slaLeft(c)<0).length;
+  if(br&&modAllowed('cs'))items.push({tone:'bad',m:`${br} حالة خدمة عملاء تجاوزت المدة`,s:'مدد الرد محددة حسب نوع الحالة',a:`data-action="goF" data-r="cs" data-path="ui.cs.status" data-v="breached"`});
+  const holds=ORDERS.filter(o=>o.st==='HOLD');
+  if(holds.length)items.push({tone:'info',m:`${holds.length} حجوزات معلّقة الدفع`,s:'المقعد محجوز 15 دقيقة، وبعدها يرجع للبيع',a:`data-action="goF" data-r="orders" data-path="ui.orders.status" data-v="HOLD"`});
+  Object.entries(PARTNERS).forEach(([k,p])=>{if(p.actual<p.sla)items.push({tone:'warn',m:`${p.n} تحت مستوى الخدمة المتفق عليه`,s:`الفعلي ${p.actual}٪ والمستهدف ${p.sla}٪`,a:`data-action="openPartner" data-id="${k}"`});});
+  items.push({tone:'warn',m:'بطء في واجهة تلقاني',s:'زمن الاستجابة 2.4 ث منذ 40 دقيقة',a:`data-action="openPartner" data-id="TELGANI"`});
+  if(modAllowed('payments')&&!S.recon.checked)items.push({tone:'warn',m:'فرق في مطابقة Apple Pay أمس',s:'عملية وحدة ما ظهرت في كشف البنك',a:`data-action="goF" data-r="payments" data-path="ui.payments.tab" data-v="recon"`});
+  return `<div class="alerts">${items.slice(0,8).map(i=>`<button class="alert ${i.tone}" ${i.a}><span class="dot"></span><span class="t"><b>${esc(i.m)}</b><small>${esc(i.s||'')}</small></span><span class="go">‹</span></button>`).join('')}</div>`;
+}
+const INTEG=[
+  {n:'إندرا: حجز وتذاكر الحرمين',st:'ok',lat:'180 ms',sync:8},
+  {n:'إندرا: مركز التحكم (حالة القطارات)',st:'ok',lat:'90 ms',sync:5},
+  {n:'نظام سار: حجز الشمال والشرق',st:'ok',lat:'340 ms',sync:21},
+  {n:'سار: مركز التحكم',st:'ok',lat:'120 ms',sync:6},
+  {n:'جيني',st:'ok',lat:'220 ms',sync:3},
+  {n:'تكسا (CTC)',st:'ok',lat:'410 ms',sync:4},
+  {n:'تلقاني',st:'warn',lat:'2.4 s',sync:44},
+  {n:'بوابة الدفع',st:'ok',lat:'160 ms',sync:2},
+  {n:'نُسك',st:'ok',lat:'300 ms',sync:30},
+  {n:'السعودية للطيران',st:'ok',lat:'260 ms',sync:18},
+  {n:'فاتورة (هيئة الزكاة)',st:'ok',lat:'510 ms',sync:60}
+];
+function integHtml(){return `<div class="integ">${INTEG.map(i=>`<div><span class="sd ${i.st}"></span><span class="n">${i.n}</span><span class="faint xs mono">${i.lat}</span><span class="faint xs">قبل ${i.sync} ث</span></div>`).join('')}</div>`;}
+
+/* ---------- disruptions ---------- */
+function dImpact(d){
+  const t=TRIP[d.trip],os=d.orders.map(id=>ORDER[id]);
+  const pax=sumBy(os,o=>o.pax);
+  const last=os.filter(o=>o.legs.some(l=>(l.type==='ride'&&l.kind==='last')||l.type==='rental')).length;
+  const first=os.filter(o=>o.legs.some(l=>l.type==='ride'&&l.kind==='first'&&l.t>d.t)).length;
+  const saudia=os.filter(o=>o.ch==='SAUDIA').length;
+  const tier=d.type==='cancel'?1:compTier(d.mins);
+  const comp=r2(sumBy(os,o=>trainLeg(o).price*tier));
+  return {t,os,pax,last,first,saudia,tier,comp,refund:r2(sumBy(os,o=>o.total))};
+}
+function dSteps(d){
+  const I=dImpact(d),op=OPS[d.op];
+  if(d.type==='cancel'){
+    const nx=nextTrip(I.t);
+    return [
+      {k:'notify',n:'إبلاغ الركاب',s:`${I.os.length+d.holds} طلب عبر SMS والإشعارات`},
+      {k:'choice',n:'إعادة الحجز أو الاسترداد',s:nx?`أقرب رحلة: ${nx.no} الساعة ${hhmm(nx.dep)}`:'ما فيه رحلة بديلة اليوم',choice:true},
+      {k:'resched',n:d.done.refund?'إلغاء التوصيلات عند الشركاء':'نقل التوصيلات لموعد الرحلة الجديدة',s:`${I.first+I.last} توصيلة`,skip:!(I.first+I.last),need:'choice'},
+      {k:'comp',n:'تعويض الإلغاء',s:`100٪ من قيمة التذكرة = ${moneyT(I.comp)}، يتحمّلها ${op}`}
+    ];
+  }
+  return [
+    {k:'notify',n:'إبلاغ الركاب',s:`${I.os.length+d.holds} طلب عبر SMS والإشعارات`},
+    {k:'resched',n:'إعادة جدولة التوصيلات مع الشركاء',s:`${I.first+I.last} توصيلة عند جيني وتكسا وتلقاني`,skip:!(I.first+I.last)},
+    {k:'meals',n:'صرف قسائم وجبات',s:`${I.pax} راكب، لأن التأخير فوق 60 دقيقة`,skip:d.mins<=60},
+    {k:'comp',n:'تطبيق التعويض الآلي',s:I.tier?`${I.tier*100}٪ من قيمة التذكرة = ${moneyT(I.comp)}، يتحمّلها ${op}`:'التأخير أقل من ساعتين: ما فيه تعويض مالي',skip:!I.tier}
+  ];
+}
+function stepDone(d,k){if(k==='choice')return !!(d.done.rebook||d.done.refund);return !!d.done[k];}
+function dDone(d){if(d.type==='ride')return !!(d.done.rebook&&d.done.comp&&d.done.recover);return dSteps(d).every(s=>s.skip||stepDone(d,s.k));}
+function nextTrip(t){return TRIPS.find(x=>x.line===t.line&&x.dir===t.dir&&x.dep>t.dep&&!x.cancelled);}
+function rideCandidates(){const n=NOW();return ORDERS.filter(o=>{if(o.st!=='CONF')return false;const r=o.legs[0];if(r.type!=='ride'||r.kind!=='first'||r.fail||r.resched||r.t<=n||trainLeg(o).trip0)return false;const t=oTrip(o);if(t.d>1||t.delay>0||!scopeOk(opOf(t)))return false;const s=tripState(t);return (s==='SCHED'||s==='DELAYED')&&r.t>n-20*MIN;}).sort((a,b)=>a.legs[0].t-b.legs[0].t);}
+V.disrupt=function(){
+  const u=S.ui.disrupt;
+  const trips=TRIPS.filter(t=>t.d<=1&&!t.cancelled&&scopeOk(opOf(t))&&['SCHED','BOARDING','DELAYED'].includes(tripState(t)));
+  if(!trips.some(t=>t.id===u.trip))u.trip=(trips.find(t=>t.line==='HHR'&&tripState(t)==='SCHED'&&t.d===0)||trips[0]||{}).id||'';
+  let form='',preview='';
+  if(u.type==='ride'){
+    const c=rideCandidates();
+    if(!c.some(o=>o.id===u.order))u.order=c[0]?c[0].id:'';
+    form=`<label>الطلب (توصيلة إلى المحطة قبل رحلة قادمة)${sel('ui.disrupt.order',c.slice(0,80).map(o=>{const r=o.legs[0];return [o.id,`${o.id} · ${PARTNERS[r.partner].n} ${hhmm(r.t)} · قطار ${oTrip(o).no} ${hhmm(stopTime(oTrip(o),trainLeg(o).from))}`];}),u.order)}</label><label>تأخر السائق (دقيقة)<input id="f-mins" type="number" min="5" max="180" data-bind="ui.disrupt.mins" value="${esc(u.mins)}"></label>`;
+    const o=ORDER[u.order];
+    if(o){const r=o.legs[0],t=oTrip(o),tl=trainLeg(o);const arrive=r.t+(+u.mins||0)*MIN+25*MIN,close=stopTime(t,tl.from)+t.delay*MIN-10*MIN;preview=arrive>close?`<div class="badbox">بهذا التأخير يوصل الراكب المحطة ${hhmm(arrive)}، والصعود يقفل ${hhmm(close)}. <b>يفوته القطار.</b></div>`:`<div class="okbox">بهذا التأخير يلحق القطار. زِد التأخير عشان تشوف السيناريو.</div>`;}
+  }else{
+    form=`<label>الرحلة${sel('ui.disrupt.trip',trips.map(t=>[t.id,tripLabel(t)]),u.trip)}</label>`+(u.type==='delay'?`<label>مدة التأخير (دقيقة)<input id="f-mins" type="number" min="5" max="600" data-bind="ui.disrupt.mins" value="${esc(u.mins)}"></label>`:'')+`<label>السبب${sel('ui.disrupt.reason',REASONS.map(r=>[r,r]),u.reason)}</label>`;
+    const t=TRIP[u.trip];
+    if(t){const os=BY_TRIP[t.id].filter(o=>o.st==='CONF');const m=+u.mins||0,tier=compTier(m);
+      preview=u.type==='delay'?`<div class="note"><b>${os.length} طلب مؤكد</b> على الرحلة. تأخير ${m} د: ${tier?'تعويض '+tier*100+'٪ من قيمة التذكرة':'ما فيه تعويض مالي'}${m>60?'، ووجبة ومشروب مجاناً':''}.</div>`:`<div class="note"><b>${os.length} طلب مؤكد</b>. إلغاء قبل أقل من 24 ساعة: استرداد كامل أو إعادة حجز، وفوقها تعويض 100٪ من التذكرة.</div>`;}
+  }
+  const act=S.disruptions.filter(d=>!dDone(d)),past=S.disruptions.filter(d=>dDone(d));
+  const canRun=can('comp')||S.role==='admin';
+  return page('الأعطال والتنبيهات','حدث واحد عند الناقل أو الشريك، وكل الطلبات المتأثرة تتحرك معه')+
+    `<div class="grid gside mb">${card('محاكاة حدث',`<div class="form"><label>نوع الحدث${sel('ui.disrupt.type',[['delay','تأخير قطار'],['cancel','إلغاء رحلة'],['ride','تأخر توصيلة وفات الراكب القطار']],u.type)}</label>${form}${preview}<div><button class="btn pri" data-action="simulate" ${canRun?'':'disabled'}>شغّل المحاكاة</button>${canRun?'':' <span class="xs muted">دورك ما يسمح</span>'}</div></div>`)}
+    ${card('شرائح التعويض',tgaTable(),'<span class="src">لائحة هيئة النقل</span>')}</div>`+
+    (act.length?`<h4>أحداث نشطة (${act.length})</h4>`+act.map(dCard).join(''):'<div class="empty mb">ما فيه أحداث نشطة. شغّل محاكاة من فوق.</div>')+
+    (past.length?`<h4>أحداث منتهية اليوم</h4>`+past.map(dCard).join(''):'');
+};
+function tgaTable(){return table([{h:'الحالة',f:r=>r[0]},{h:'حق الراكب',f:r=>r[1]}],[
+  ['تأخير ساعتين إلى 3','تعويض 50٪ من التذكرة'],['تأخير 3 إلى 4 ساعات','تعويض 75٪'],['تأخير أكثر من 4 ساعات','تعويض 100٪'],['تأخير أكثر من 60 دقيقة','وجبة خفيفة ومشروب مجاناً'],['إلغاء قبل أقل من 24 ساعة','استرداد كامل + تعويض 100٪'],['إلغاء قبل 24 إلى 48 ساعة','استرداد كامل + تعويض 50٪'],['السبب خدمة ثانية ما لها علاقة بالناقل','ما فيه تعويض على الناقل'],['صرف الاسترجاع','خلال 14 يوم كحد أقصى']])+`<p class="xs muted">الأرقام من تغطية إخبارية للآلية التفصيلية، والنص المعتمد يُراجع قبل التطبيق.</p>`;}
+function dCard(d){
+  if(d.type==='ride')return rideCard(d);
+  const I=dImpact(d),t=I.t,steps=dSteps(d),done=dDone(d);
+  const typ=d.type==='cancel'?'إلغاء رحلة':`تأخير ${d.mins} دقيقة`;
+  return `<div class="dcard ${done?'':'active'}"><div class="row between"><div><b>${d.id} · ${typ}</b> ${lineChip(t.line)} <span class="mono">${t.no}</span><div class="xs muted">${routeOf(t)} · ${dt(t.dep)} · ${esc(d.reason)} · سُجّل ${rel(d.t)}</div></div>${done?badge('اكتمل','ok'):badge('قيد المعالجة','warn')}</div>
+  <div class="ikpis"><div class="ikpi"><b>${num(I.os.length)}</b><span>طلب متأثر</span></div><div class="ikpi"><b>${num(I.pax)}</b><span>راكب</span></div><div class="ikpi"><b>${num(I.first)}</b><span>توصيلة قبل المغادرة</span></div><div class="ikpi"><b>${num(I.last)}</b><span>توصيلة أو تأجير بعد الوصول</span></div><div class="ikpi"><b>${num(I.saudia)}</b><span>مرتبطين برحلة طيران</span></div><div class="ikpi"><b>${moneyT(d.type==='cancel'?I.comp:I.comp)}</b><span>تكلفة التعويض</span></div></div>
+  <div class="note"><b>مين يتحمّل؟</b> ${OPS[d.op]} (الناقل)، لأن السبب عنده. ماسي تصرف للعميل لأنها نقطة التواصل الوحيدة، وتخصم المبلغ من مستحقات ${OPS[d.op]} في التسويات.</div>
+  <div class="steps">${steps.map((s,i)=>{const ok=stepDone(d,s.k);const blocked=s.need&&!stepDone(d,s.need);
+    let btn='';
+    if(!ok&&!s.skip){btn=s.choice?`<button class="btn sm pri" data-action="dstep" data-id="${d.id}" data-step="rebook">إعادة حجز</button><button class="btn sm" data-action="dstep" data-id="${d.id}" data-step="refund">استرداد كامل</button>`:`<button class="btn sm pri" data-action="dstep" data-id="${d.id}" data-step="${s.k}" ${blocked?'disabled':''}>نفّذ</button>`;}
+    const res=ok?stepResult(d,s.k):'';
+    return `<div class="step ${ok?'done':''} ${s.skip?'skip':''}"><span class="n">${ok?'✓':i+1}</span><span class="t"><b>${s.n}</b><small>${s.skip?'ما ينطبق':s.s}${res?' · '+res:''}</small></span><span class="row">${btn}</span></div>`;}).join('')}</div>
+  ${done?'':`<div class="row mt"><button class="btn" data-action="dall" data-id="${d.id}">نفّذ كل الخطوات</button><button class="btn" data-action="goF" data-r="orders" data-path="ui.orders.trip" data-v="${t.id}">عرض الطلبات المتأثرة</button></div>`}</div>`;
+}
+function stepResult(d,k){if(k==='choice'&&d.done.rebook)return `انتقل ${d.done.rebook.moved} طلب${d.done.rebook.left?'، و'+d.done.rebook.left+' ما لقينا لهم مقاعد':''}`;if(k==='choice'&&d.done.refund)return 'تم استرداد كامل المبالغ';if(k==='resched'&&typeof d.done.resched==='number')return d.done.resched+' توصيلة تعدّلت';return '';}
+function rideCard(d){
+  const o=ORDER[d.order],r=d.ride,tl=trainLeg(o),t0=TRIP[d.trip0],p=PARTNERS[r.partner];
+  const steps=[
+    {k:'rebook',n:'إعادة الحجز على أقرب رحلة بدون رسوم',s:d.done.rebook?`انتقل إلى ${TRIP[tl.trip].no} الساعة ${hhmm(stopTime(TRIP[tl.trip],tl.from))}`:'نفس المسار ونفس الدرجة'},
+    {k:'newride',n:'توصيلة بديلة للرحلة الجديدة',s:d.done.newride?d.done.newride:'مع شريك ثاني',need:'rebook'},
+    {k:'comp',n:'تعويض العميل من ماسي',s:`استرداد قيمة التوصيلة (${moneyT(r.price)}) + 25٪ من التذكرة (${moneyT(r2(tl.price*.25))})`},
+    {k:'recover',n:`مطالبة ${p.n} بالتكلفة`,s:`حسب اتفاقية مستوى الخدمة: ${moneyT(r2(r.price+tl.price*.25))} تنخصم من مستحقاته`}
+  ];
+  const done=dDone(d);
+  return `<div class="dcard ${done?'':'active'}"><div class="row between"><div><b>${d.id} · تأخر توصيلة ${d.mins} دقيقة</b> <span class="mono">${o.id}</span><div class="xs muted">${esc(o.name)} · ${p.n} ${r.ref} · كان المفروض يلحق ${t0.no} الساعة ${hhmm(stopTime(t0,tl.from))} · سُجّل ${rel(d.t)}</div></div>${done?badge('اكتمل','ok'):badge('قيد المعالجة','warn')}</div>
+  <div class="grid g2 mt"><div class="badbox"><b>لائحة هيئة النقل:</b> ${OPS[opOf(t0)]} معفى من التعويض، لأن السبب خدمة ثانية ما لها علاقة فيه.</div><div class="warnbox"><b>لكن ماسي وعدت إنها نقطة التواصل الوحيدة</b>، فالعميل بيطالب ماسي. سياسة النموذج: ماسي تعوّض فوراً وتسترد من ${p.n}. <span class="assume">افتراضي</span></div></div>
+  <div class="steps">${steps.map((s,i)=>{const ok=!!d.done[s.k];const blocked=s.need&&!d.done[s.need];return `<div class="step ${ok?'done':''}"><span class="n">${ok?'✓':i+1}</span><span class="t"><b>${s.n}</b><small>${s.s}</small></span>${ok?'':`<button class="btn sm pri" data-action="rstep" data-id="${d.id}" data-step="${s.k}" ${blocked?'disabled':''}>نفّذ</button>`}</div>`;}).join('')}</div>
+  <div class="row mt"><button class="btn" data-action="openOrder" data-id="${o.id}">فتح الطلب</button>${d.caseId?`<button class="btn" data-action="openCase" data-id="${d.caseId}">الحالة ${d.caseId}</button>`:''}</div></div>`;
+}
+
+/* ---------- stations ---------- */
+function manifest(t,st){const out=[];for(const o of BY_TRIP[t.id]){const tl=trainLeg(o);if(tl.trip!==t.id||tl.from!==st)continue;if(o.st==='CXL'||o.st==='HOLD'||o.st==='EXP')continue;for(let i=0;i<o.pax;i++)out.push({o,i,key:o.id+':'+i,name:paxName(o,i),seat:seatLabel(t,tl.cls,tl.seat+i),cls:tl.cls,to:tl.to});}return out;}
+function boarded(p,t){if(p.o.st==='NOSHOW'||trainLeg(p.o).missed)return false;const s=tripState(t);if(s==='RUNNING'||s==='ARRIVED')return true;return S.boarded.has(p.key);}
+V.stations=function(){
+  const u=S.ui.stations;
+  const sts=Object.keys(ST).filter(s=>scopeOk(ST_OP[s]));
+  if(!sts.includes(u.st))u.st=sts.includes('MKK')?'MKK':sts[0];
+  const deps=TRIPS.filter(t=>t.d===0&&!t.cancelled&&stopIdx(t,u.st)>-1&&stopIdx(t,u.st)<t.stops.length-1).sort((a,b)=>stopTime(a,u.st)-stopTime(b,u.st));
+  if(!deps.some(t=>t.id===u.trip))u.trip=(deps.find(t=>stopTime(t,u.st)+t.delay*MIN>NOW())||deps[0]||{}).id||'';
+  const t=TRIP[u.trip];
+  let body='<div class="empty">ما فيه رحلات من هذي المحطة اليوم</div>';
+  if(t){
+    const m=manifest(t,u.st),bd=m.filter(p=>boarded(p,t)).length,s=tripState(t),locked=s==='RUNNING'||s==='ARRIVED';
+    const tabs=[['board','الصعود'],['bags','الأمتعة'],['prm','المساعدة الخاصة'],['meals','الوجبات']];if(u.st==='RYN'||u.st==='QRY')tabs.push(['cars','شحن السيارات']);
+    if(!tabs.some(x=>x[0]===u.tab))u.tab='board';
+    let tb='';
+    if(u.tab==='board'){
+      const q=u.q.trim();const f=q?m.filter(p=>p.name.includes(q)||p.o.id.includes(q)||p.seat.includes(q)):m;const pg=paginate(f,'stations',30);
+      tb=`<div class="filters"><input id="f-sq" type="search" placeholder="اسم، رقم طلب، أو عربة" data-bind="ui.stations.q" value="${esc(u.q)}">${locked?badge('القطار غادر، القائمة مقفلة','neutral'):''}</div>`+table([
+        {h:'الراكب',f:p=>`<b>${esc(p.name)}</b>${p.i===0&&p.o.pax>1?` <span class="xs muted">+${p.o.pax-1}</span>`:''}${p.o.prm&&p.i===0?' '+badge(p.o.prm,'info'):''}`},
+        {h:'المقعد',f:p=>p.seat},{h:'الدرجة',f:p=>CLASSES[p.cls]},{h:'إلى',f:p=>ST[p.to]},{h:'الطلب',f:p=>`<button class="btn sm" data-action="openOrder" data-id="${p.o.id}"><span class="mono">${p.o.id}</span></button>`},
+        {h:'الصعود',f:p=>boarded(p,t)?badge('صعد','ok'):p.o.st==='NOSHOW'?badge('لم يحضر','neutral'):locked?badge('ما صعد','bad'):`<button class="btn sm pri" data-action="board" data-key="${p.key}">تسجيل صعود</button>`}
+      ],pg.rows)+pg.html;
+    }else if(u.tab==='bags'){
+      const os=[...new Set(m.map(p=>p.o))].filter(o=>o.legs.some(l=>l.type==='extra'&&l.items.some(i=>i.k==='bag')));
+      tb=`<p class="xs muted">الحد المسموح حسب الدرجة، وكل شنطة إضافية مشتراة تضيف 23 كجم. الزيادة 10 ر.س للكيلو. <span class="assume">افتراضي</span></p>`+table([
+        {h:'الطلب',f:o=>`<span class="mono">${o.id}</span>`},{h:'الراكب',f:o=>esc(o.name)},{h:'الدرجة',f:o=>CLASSES[trainLeg(o).cls]},{h:'شنط مشتراة',f:o=>sumBy(o.legs.filter(l=>l.type==='extra').flatMap(l=>l.items).filter(i=>i.k==='bag'),i=>i.q),c:'num'},
+        {h:'الوزن والرسوم',f:o=>{const b=S.bags[o.id];return b?`${b.w} كجم من ${b.allow} · ${b.fee?'<span class="warn-t">رسوم '+moneyT(b.fee)+'</span>':'<span class="ok-t">ضمن الحد</span>'}`:`<button class="btn sm" data-action="bag" data-id="${o.id}">وزن وتسجيل</button>`;}}
+      ],os,{empty:'ما فيه شنط إضافية على هذي الرحلة من هذي المحطة'});
+    }else if(u.tab==='prm'){
+      const os=[...new Set(m.map(p=>p.o))].filter(o=>o.prm);
+      tb=table([{h:'الطلب',f:o=>`<span class="mono">${o.id}</span>`},{h:'الراكب',f:o=>esc(o.name)},{h:'نوع المساعدة',f:o=>badge(o.prm,'info')},{h:'المقعد',f:o=>seatLabel(t,trainLeg(o).cls,trainLeg(o).seat)},{h:'الحالة',f:o=>S.prmDone.has(o.id)?badge('تم الترتيب','ok'):`<button class="btn sm pri" data-action="prm" data-id="${o.id}">تم الترتيب</button>`}],os,{empty:'ما فيه طلبات مساعدة خاصة'});
+    }else if(u.tab==='meals'){
+      tb=mealsFor(t,u.st);
+    }else{
+      const cs=S.cars.filter(c=>c.trip===t.id);
+      tb=table([{h:'الرقم',f:c=>`<span class="mono">${c.id}</span>`},{h:'السيارة',f:c=>c.make+' · '+c.plate},{h:'المالك',f:c=>esc(c.owner)+(c.withOwner?' '+badge('مسافر معها','info'):'')},{h:'الحالة',f:c=>badge(CAR_ST[c.st],c.st>=5?'ok':'neutral')+(c.damage?' '+badge('ملاحظة تلف','bad'):'')},{h:'',f:c=>c.st<5?`<button class="btn sm" data-action="cargoNext" data-kind="car" data-id="${c.id}">${CAR_ST[c.st+1]}</button>`:''}],cs,{empty:'ما فيه سيارات على هذي الرحلة'});
+    }
+    body=`<div class="row between mb-s"><div><b class="mono">${t.no}</b> ${lineChip(t.line)} ${tripBadge(t)} <span class="muted xs">من ${ST[u.st]} ${timeCell(stopTime(t,u.st),t.delay,t.d)} · رصيف ${t.platform}</span></div><div class="row"><span class="badge info">صعد ${bd} من ${m.length}</span></div></div>`+
+      `<div class="tabs">${tabs.map(([k,l])=>`<button class="tab ${u.tab===k?'on':''}" data-action="set" data-path="ui.stations.tab" data-v="${k}">${l}</button>`).join('')}</div>`+tb;
+  }
+  return page('أدوات المحطات','قائمة الركاب، والصعود، والأمتعة، والمساعدة الخاصة، وشحن السيارات')+
+    `<div class="filters"><label class="xs muted">المحطة</label>${sel('ui.stations.st',sts.map(s=>[s,ST[s]]),u.st)}</div>`+
+    `<div class="grid gst">${card('مغادرات اليوم',table([{h:'الوقت',f:x=>timeCell(stopTime(x,u.st),x.delay,x.d)},{h:'الرحلة',f:x=>`<span class="mono">${x.no}</span>`},{h:'إلى',f:x=>ST[x.stops.at(-1)]},{h:'',f:tripBadge}],deps,{row:x=>`class="click ${x.id===u.trip?'sel':''}" data-action="set" data-path="ui.stations.trip" data-v="${x.id}"`}))}${card('',body)}</div>`;
+};
+function mealsFor(t,st){
+  const os=BY_TRIP[t.id].filter(o=>(o.st==='CONF'||o.st==='NOSHOW')&&(!st||trainLeg(o).from===st)&&o.legs.some(l=>l.type==='meal'));
+  const agg={};os.forEach(o=>o.legs.filter(l=>l.type==='meal').forEach(l=>l.items.forEach(i=>agg[i.id]=(agg[i.id]||0)+i.q)));
+  const sent=S.catering[t.id];
+  return `<div class="row between mb-s"><span class="muted xs">${os.length} طلب فيه وجبات أو هدايا</span>${sent?badge('أُرسلت للطاقم '+rel(sent),'ok'):`<button class="btn sm pri" data-action="sendCatering" data-id="${t.id}">إرسال القائمة لطاقم التموين</button>`}</div>`+
+    table([{h:'الصنف',f:([id])=>MENU_BY[id].n},{h:'الفئة',f:([id])=>MENU_BY[id].cat},{h:'مسببات الحساسية',f:([id])=>MENU_BY[id].al.map(a=>`<span class="tag">${a}</span>`).join(' ')||'<span class="faint">لا شيء</span>'},{h:'الكمية',f:([,q])=>num(q),c:'num'}],Object.entries(agg).sort((a,b)=>b[1]-a[1]),{empty:'ما فيه طلبات مسبقة'})+
+    `<h4>حسب المقعد</h4>`+table([{h:'المقعد',f:o=>seatLabel(t,trainLeg(o).cls,trainLeg(o).seat)},{h:'الراكب',f:o=>esc(o.name)},{h:'الطلب',f:o=>o.legs.filter(l=>l.type==='meal').flatMap(l=>l.items).map(i=>MENU_BY[i.id].n+' × '+i.q).join('، ')}],os.slice(0,40));
+}
+
+/* ---------- orders ---------- */
+function filterOrders(){
+  const u=S.ui.orders,q=u.q.trim().toLowerCase();
+  return ORDERS_DESC.filter(o=>{
+    const tl=trainLeg(o),t=TRIP[tl.trip];
+    if(!scopeOk(opOf(t)))return false;
+    if(u.trip&&tl.trip!==u.trip&&tl.trip0!==u.trip)return false;
+    if(u.line&&t.line!==u.line)return false;
+    if(u.status&&oStatus(o)!==u.status)return false;
+    if(u.ch&&o.ch!==u.ch)return false;
+    if(u.day!==''&&t.d!==+u.day)return false;
+    if(u.rides&&!o.legs.some(l=>l.type==='ride'||l.type==='rental'))return false;
+    if(q){const hay=(o.id+' '+o.name+' '+o.phone+' '+tl.pnr+' '+o.legs.map(l=>l.ref||'').join(' ')).toLowerCase();if(!hay.includes(q))return false;}
+    return true;
+  });
+}
+V.orders=function(){
+  const u=S.ui.orders,f=filterOrders(),pg=paginate(f,'orders',25);
+  const tripF=u.trip?`<span class="badge accent">رحلة ${TRIP[u.trip].no} <button class="btn sm" style="padding:0 6px" data-action="set" data-path="ui.orders.trip" data-v="">إزالة</button></span>`:'';
+  return page('الطلبات والحجوزات','كل طلب فيه أكثر من مزوّد: توصيلة، وقطار، وتوصيلة، ووجبة. رقم واحد عند ماسي ورقم عند كل مزوّد.')+
+    `<div class="filters"><input id="f-oq" type="search" placeholder="رقم الطلب، الاسم، الجوال، PNR، رقم التوصيلة" data-bind="ui.orders.q" value="${esc(u.q)}">`+
+    sel('ui.orders.day',[['','كل الأيام'],['0','اليوم'],['1','بكرة'],['2','بعد بكرة']],u.day)+
+    sel('ui.orders.line',[['','كل الخطوط'],['HHR','الحرمين'],['EAST','الشرق'],['NORTH','الشمال']],u.line)+
+    sel('ui.orders.status',[['','كل الحالات']].concat(Object.entries(O_ST).map(([k,v])=>[k,v[0]])),u.status)+
+    sel('ui.orders.ch',[['','كل القنوات']].concat(Object.entries(CH)),u.ch)+
+    `<label class="row xs muted"><input type="checkbox" data-bind="ui.orders.rides" ${u.rides?'checked':''}> فيه توصيلة أو تأجير</label>${tripF}</div>`+
+    `<div class="mb-s">${legendHtml}</div>`+
+    table([
+      {h:'الطلب',f:o=>`<b class="mono">${o.id}</b><div class="xs faint">${dt(o.created)}</div>`},
+      {h:'العميل',f:o=>`${esc(o.name)}<div class="xs faint mono">${maskPhone(o.phone)}</div>`},
+      {h:'الرحلة',f:o=>{const tl=trainLeg(o),t=TRIP[tl.trip];return `${lineChip(t.line)} <span class="mono">${t.no}</span><div class="xs muted">${ST[tl.from]} ← ${ST[tl.to]} · ${dt(stopTime(t,tl.from))}</div>`;}},
+      {h:'المكوّنات',f:legChips},
+      {h:'القناة',f:o=>CH[o.ch]},
+      {h:'الركاب',f:o=>o.pax,c:'num'},
+      {h:'الإجمالي',f:o=>money(o.total),c:'num'},
+      {h:'الحالة',f:o=>oBadge(o)+(o.st==='HOLD'?` <span class="xs warn-t" data-cd="${o.holdUntil}"></span>`:'')}
+    ],pg.rows,{row:o=>`class="click" data-action="openOrder" data-id="${o.id}"`})+pg.html;
+};
+
+/* ---------- inventory ---------- */
+V.inventory=function(){
+  const u=S.ui.inventory;
+  const list=TRIPS.filter(t=>t.d===+u.day&&scopeOk(opOf(t))&&(!u.line||t.line===u.line));
+  const cap=sumBy(list,t=>sumObj(t.cap)),sold=sumBy(list,t=>sumObj(t.sold)),bl=sumBy(list,t=>sumObj(t.blocked));
+  return page('المخزون والجدول','المقاعد لكل رحلة ودرجة، وحصص كل قناة بيع')+
+    `<div class="filters">${chips('ui.inventory.day',[['0','اليوم'],['1','بكرة'],['2','بعد بكرة']],u.day)}${sel('ui.inventory.line',[['','كل الخطوط'],['HHR','الحرمين'],['EAST','الشرق'],['NORTH','الشمال']],u.line)}</div>`+
+    kpis([{l:'الرحلات',v:list.length},{l:'السعة',v:num(cap)},{l:'المباع',v:num(sold)},{l:'المحجوب',v:num(bl)},{l:'متوسط الامتلاء',v:Math.round(sold/Math.max(1,cap)*100)+'٪'},{l:'رحلات فوق 90٪',v:list.filter(t=>sumObj(t.sold)/sumObj(t.cap)>.9).length,tone:'warn'}])+
+    `<div class="warnbox mb"><b>مصدر الحقيقة للمقعد:</b> مقاعد الحرمين في نظام إندرا، ومقاعد الشمال والشرق في نظام سار. نُسك والسعودية للطيران والوكلاء يبيعون من نفس المقاعد. هنا ماسي تمسك الحصص، والحجز النهائي يتأكد عند الناقل. <span class="faint">آخر مزامنة: إندرا قبل 8 ث · سار قبل 21 ث</span></div>`+
+    table([
+      {h:'الرحلة',f:t=>`<b class="mono">${t.no}</b> ${lineChip(t.line)}`},{h:'المسار',f:routeOf},{h:'المغادرة',f:t=>timeCell(t.dep,t.delay,t.d)},
+      {h:'الدرجات (مباع / سعة)',f:t=>Object.keys(t.cap).map(c=>`<span class="tag">${CLASSES[c]} ${t.sold[c]}/${t.cap[c]}</span>`).join(' ')},
+      {h:'محجوب',f:t=>sumObj(t.blocked),c:'num'},{h:'متاح',f:t=>num(Object.keys(t.cap).reduce((s,c)=>s+avail(t,c),0)),c:'num'},
+      {h:'الامتلاء',f:t=>loadBar(sumObj(t.sold)/sumObj(t.cap))},{h:'الحالة',f:tripBadge}
+    ],list,{row:t=>`class="click" data-action="openTrip" data-id="${t.id}"`});
+};
+
+/* ---------- fares ---------- */
+V.fares=function(){
+  const u=S.ui.fares,L=LINES[u.line],ed=can('editFares');
+  const clsOpts=Object.keys(CAPS[u.line]);if(!clsOpts.includes(u.cls))u.cls=clsOpts[0];
+  const st=L.stops;
+  const matrix=`<div class="tbl"><table class="matrix"><thead><tr><th>من \\ إلى</th>${st.map(s=>`<th>${ST[s]}</th>`).join('')}</tr></thead><tbody>${st.map(a=>`<tr><td><b>${ST[a]}</b></td>${st.map(b=>`<td>${a===b?'<span class="faint">·</span>':moneyT(fare(u.line,a,b,u.cls))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  return page('الأسعار والعروض','السعر = دقائق الرحلة × سعر الدقيقة للخط × معامل الدرجة × معامل الموسم',ed?'<button class="btn pri" data-action="saveFares">اعتماد الأسعار</button>':'<span class="badge">قراءة فقط لدورك</span>')+
+    `<div class="grid g2 mb">${card('سعر الدقيقة لكل خط',`<div class="form">${Object.keys(LINES).map(l=>`<label>${LINES[l].n} (ر.س للدقيقة)<input id="f-rate-${l}" type="number" step="0.01" min="0.1" data-bind="rate.${l}" value="${S.rate[l]}" ${ed?'':'disabled'}></label>`).join('')}</div>`)}
+    ${card('معامل الدرجة',`<div class="form" style="grid-template-columns:repeat(2,minmax(0,1fr))">${Object.keys(CLASSES).map(c=>`<label>${CLASSES[c]} ${['ECO','BUS'].includes(c)?'(حرمين)':'(سار)'}<input id="f-mult-${c}" type="number" step="0.05" min="0.3" data-bind="mult.${c}" value="${S.mult[c]}" ${ed?'':'disabled'}></label>`).join('')}</div>`)}</div>`+
+    card('مصفوفة الأسعار',`<div class="filters">${sel('ui.fares.line',Object.keys(LINES).map(l=>[l,LINES[l].n]),u.line)}${sel('ui.fares.cls',clsOpts.map(c=>[c,CLASSES[c]]),u.cls)}<span class="xs muted">الموسم</span>${chips('season',Object.entries(SEASONS).map(([k,v])=>[k,v[0]+(v[1]!==1?' ×'+v[1]:'')]),S.season)}</div>${matrix}<p class="xs muted">الأسعار وهمية. التعديل ينطبق على الحجوزات الجديدة بس، والحجوزات القائمة تحتفظ بسعرها.</p>`,'','mb')+
+    `<div class="grid g2">${card('أكواد الخصم',table([{h:'الكود',f:p=>`<b class="mono">${p.code}</b>`},{h:'الخصم',f:p=>p.d},{h:'الاستخدام',f:p=>`${num(p.used)} / ${num(p.limit)}`},{h:'ينتهي',f:p=>p.until},{h:'',f:p=>`<button class="btn sm ${p.on?'okb':''}" data-action="promo" data-id="${p.code}" ${ed?'':'disabled'}>${p.on?'فعّال':'موقوف'}</button>`}],S.promos))}
+    ${card('قواعد الحزم',`<div class="alerts">${[['قطار + توصيلة','خصم 10٪ على التوصيلة لما تنحجز مع التذكرة'],['درجة أعمال + وجبة','الوجبة الأولى مجانية، والتموين يفوتر ماسي'],['مجموعات 11 فأكثر','الحجز قبل 4 أيام، والأسماء تكتمل قبل 4 أيام من الرحلة'],['تأجير + قطار الشمال','يوم تأجير مجاني لرحلات القريات والجوف']].map(([a,b])=>`<div class="alert"><span class="dot"></span><span class="t"><b>${a}</b><small>${b}</small></span></div>`).join('')}</div><p class="xs muted">قواعد افتراضية للنموذج.</p>`)}</div>`;
+};
+
+/* ---------- customer service ---------- */
+V.cs=function(){
+  const u=S.ui.cs,q=u.q.trim();
+  let f=S.cases.filter(c=>{if(c.order&&!scopeOk(opOf(oTrip(ORDER[c.order]))))return false;if(u.type&&c.type!==u.type)return false;
+    if(u.status==='open'&&c.st==='resolved')return false;if(u.status==='breached'&&!(c.st!=='resolved'&&slaLeft(c)<0))return false;if(u.status==='escalated'&&c.st!=='escalated')return false;if(u.status==='resolved'&&c.st!=='resolved')return false;
+    if(q&&!(c.id+' '+c.name+' '+(c.order||'')).includes(q))return false;return true;});
+  const pg=paginate(f,'cs',25),open=S.cases.filter(c=>c.st!=='resolved');
+  const CS_ST={open:['جديدة','info'],progress:['قيد المعالجة','accent'],escalated:['مصعّدة','warn'],resolved:['محلولة','ok']};
+  return page('خدمة العملاء','قناة وحدة لكل استفسار وتعديل واسترجاع ومطالبة وشكوى: التطبيق والموقع والكول سنتر 011 510 2751')+
+    kpis([{l:'مفتوحة',v:open.length},{l:'تجاوزت المدة',v:open.filter(c=>slaLeft(c)<0).length,tone:'bad'},{l:'مصعّدة لناقل أو شريك',v:open.filter(c=>c.st==='escalated').length,tone:'warn'},{l:'محلولة',v:S.cases.filter(c=>c.st==='resolved').length,tone:'ok'},{l:'حد التعويض الودّي لدورك',v:role().goodwill===Infinity?'مفتوح':moneyT(role().goodwill)}])+
+    `<div class="filters"><input id="f-cq" type="search" placeholder="رقم الحالة، الاسم، رقم الطلب" data-bind="ui.cs.q" value="${esc(u.q)}">${chips('ui.cs.status',[['open','المفتوحة'],['breached','تجاوزت المدة'],['escalated','المصعّدة'],['resolved','المحلولة'],['all','الكل']],u.status)}${sel('ui.cs.type',[['','كل الأنواع']].concat(Object.keys(CASE_T).map(k=>[k,k])),u.type)}</div>`+
+    table([
+      {h:'الحالة',f:c=>`<b class="mono">${c.id}</b><div class="xs faint">${rel(c.created)}</div>`},{h:'النوع',f:c=>badge(c.type,c.type==='مطالبة'||c.type==='شكوى'?'warn':'neutral')},
+      {h:'العميل',f:c=>esc(c.name)+(c.order?`<div class="xs faint mono">${c.order}</div>`:'')},{h:'القناة',f:c=>c.ch},{h:'الأولوية',f:c=>c.pri==='عالية'?'<span class="bad-t">عالية</span>':c.pri},
+      {h:'المسؤول',f:c=>c.agent?esc(c.agent):'<span class="faint">غير معيّنة</span>'},
+      {h:'المدة المتبقية',f:c=>c.st==='resolved'?'<span class="faint">انتهت</span>':slaLeft(c)<0?`<span class="bad-t">متجاوزة ${dur(slaLeft(c))}</span>`:dur(slaLeft(c))},
+      {h:'الوضع',f:c=>badge(CS_ST[c.st][0],CS_ST[c.st][1])+(c.esc?' '+badge('عند '+payeeName(c.esc),'neutral'):'')}
+    ],pg.rows,{row:c=>`class="click" data-action="openCase" data-id="${c.id}"`})+pg.html;
+};
+
+/* ---------- notifications ---------- */
+V.notify=function(){
+  const pg=paginate(S.notifs,'notify',20);
+  return page('الإشعارات','القوالب بالعربي والإنجليزي، وسجل كل اللي انرسل')+
+    `<div class="grid g3 mb">${TEMPLATES.map(x=>`<div class="tpl"><div class="row between"><b>${x.n}</b><span class="tag">${x.ch}</span></div><p>${esc(x.ar)}</p><p class="en">${esc(x.en)}</p><div><button class="btn sm" data-action="testSend" data-id="${x.id}">إرسال تجريبي</button></div></div>`).join('')}</div>`+
+    card('سجل الإرسال',table([{h:'الوقت',f:n=>dt(n.t)},{h:'القالب',f:n=>TPL(n.tpl).n},{h:'المستلمين',f:n=>num(n.n),c:'num'},{h:'القناة',f:n=>TPL(n.tpl).ch},{h:'المرجع',f:n=>esc(n.ref)},{h:'الحالة',f:n=>badge(n.st,'ok')}],pg.rows)+pg.html);
+};
+
+/* ---------- partners ---------- */
+V.partners=function(){
+  const u=S.ui.partners;
+  const all=ridesToday();
+  const f=all.filter(r=>(!u.p||r.l.partner===u.p)&&(!u.status||rideState(r.l,r.o)===u.status)).sort((a,b)=>a.l.t-b.l.t);
+  const pg=paginate(f,'partners',25);
+  return page('الشركاء والتوصيل','كل توصيلة مربوطة بقطار. لو تحرك القطار، تتحرك التوصيلة معه')+
+    `<div class="pcards">${Object.entries(PARTNERS).map(([k,p])=>{const rs=all.filter(r=>r.l.partner===k);const fl=rs.filter(r=>rideState(r.l,r.o)==='FAILED').length;return `<button class="pcard" data-action="openPartner" data-id="${k}"><div class="row between"><b>${p.n}</b><span class="sd ${p.api==='ok'?'':'warn'}"></span></div><span class="xs muted">${p.kind} · عمولة ماسي ${p.com*100}٪</span><div class="row"><span class="tag">اليوم ${num(k==='CATER'?mealOrdersToday():rs.length)}</span>${fl?badge(fl+' فشلت','bad'):''}<span class="tag ${p.actual<p.sla?'bad-t':''}">مستوى الخدمة ${p.actual}٪ / ${p.sla}٪</span></div></button>`;}).join('')}</div>`+
+    card('التوصيلات اليوم',`<div class="filters">${sel('ui.partners.p',[['','كل الشركاء'],['JEENY','جيني'],['TAXA','تكسا'],['TELGANI','تلقاني'],['BUS','حافلات مكة']],u.p)}${sel('ui.partners.status',[['','كل الحالات']].concat(Object.entries(RIDE_ST).map(([k,v])=>[k,v[0]])),u.status)}</div>`+
+    table([
+      {h:'المرجع',f:r=>`<span class="mono">${r.l.ref}</span>`},{h:'الشريك',f:r=>PARTNERS[r.l.partner].n},{h:'النوع',f:r=>r.l.type==='rental'?'تأجير':r.l.kind==='first'?'إلى المحطة':'من المحطة'},
+      {h:'الموعد',f:r=>hhmm(r.l.t)},{h:'المكان',f:r=>r.l.type==='rental'?ST[r.l.st]:(r.l.kind==='first'?esc(r.l.addr)+' ← '+ST[r.l.st]:ST[r.l.st]+' ← '+esc(r.l.addr))},
+      {h:'القطار',f:r=>`<span class="mono">${TRIP[trainLeg(r.o).trip].no}</span>`},{h:'السائق',f:r=>r.l.type==='rental'?r.l.car:esc(r.l.driver)},{h:'الحالة',f:r=>rBadge(r.l,r.o)+(r.l.fail?` <span class="xs bad-t">تأخر ${r.l.failMins} د</span>`:'')}
+    ],pg.rows,{row:r=>`class="click" data-action="openOrder" data-id="${r.o.id}"`})+pg.html);
+};
+function mealOrdersToday(){let c=0;TRIPS.forEach(t=>{if(t.d===0)BY_TRIP[t.id].forEach(o=>{if(o.legs.some(l=>l.type==='meal'))c++;});});return c;}
+
+/* ---------- onboard ---------- */
+V.onboard=function(){
+  const u=S.ui.onboard;
+  const trips=TRIPS.filter(t=>t.d<=1&&!t.cancelled&&scopeOk(opOf(t))&&tripState(t)!=='ARRIVED');
+  if(!trips.some(t=>t.id===u.trip))u.trip=(trips[0]||{}).id||'';
+  const t=TRIP[u.trip];
+  return page('الخدمات داخل القطار','القائمة، ومسببات الحساسية، والطلبات المسبقة لكل رحلة')+
+    `<div class="grid g2">${card('القائمة والمتجر',table([{h:'الصنف',f:m=>`<b>${m.n}</b><div class="xs faint">${m.cat}</div>`},{h:'السعرات',f:m=>m.kcal?num(m.kcal):'<span class="faint">لا ينطبق</span>',c:'num'},{h:'الحساسية',f:m=>m.al.map(a=>`<span class="tag">${a}</span>`).join(' ')||'<span class="faint">لا شيء</span>'},{h:'السعر',f:m=>money(m.price),c:'num'},{h:'',f:m=>`<button class="btn sm ${m.on?'okb':''}" data-action="menuToggle" data-id="${m.id}">${m.on?'متاح':'موقوف'}</button>`}],MENU))}
+    ${card('الطلبات المسبقة للرحلة',`<div class="filters">${sel('ui.onboard.trip',trips.map(x=>[x.id,tripLabel(x)]),u.trip)}</div>`+(t?mealsFor(t,null):'<div class="empty">ما فيه رحلات</div>'))}</div>`;
+};
+
+/* ---------- cargo ---------- */
+V.cargo=function(){
+  const u=S.ui.cargo;
+  const cars=S.cars.filter(c=>scopeOk('SAR')),pcl=S.parcels;
+  const body=u.tab==='cars'?table([{h:'الرقم',f:c=>`<span class="mono">${c.id}</span>`},{h:'الرحلة',f:c=>`<span class="mono">${TRIP[c.trip].no}</span> <span class="xs muted">${dt(TRIP[c.trip].dep)}</span>`},{h:'المسار',f:c=>ST[c.from]+' ← '+ST[c.to]},{h:'السيارة',f:c=>c.make+'<div class="xs faint">'+c.plate+'</div>'},{h:'المالك',f:c=>esc(c.owner)+(c.withOwner?' '+badge('مسافر معها','info'):'')},{h:'السعر',f:c=>money(c.price),c:'num'},{h:'الحالة',f:c=>badge(CAR_ST[c.st],c.st>=5?'ok':c.st>=2?'accent':'neutral')+(c.damage?' '+badge('ملاحظة تلف','bad'):'')},{h:'',f:c=>c.st<5?`<button class="btn sm" data-action="cargoNext" data-kind="car" data-id="${c.id}">${CAR_ST[c.st+1]}</button>`:''}],cars)
+    :table([{h:'الرقم',f:p=>`<span class="mono">${p.id}</span>`},{h:'المسار',f:p=>ST[p.from]+' ← '+ST[p.to]},{h:'الوزن',f:p=>p.w+' كجم',c:'num'},{h:'المرسل',f:p=>esc(p.sender)},{h:'المستلم',f:p=>esc(p.receiver)},{h:'السعر',f:p=>money(p.price),c:'num'},{h:'الحالة',f:p=>badge(PCL_ST[p.st],p.st>=5?'ok':'neutral')},{h:'',f:p=>p.st<5?`<button class="btn sm" data-action="cargoNext" data-kind="pcl" data-id="${p.id}">${PCL_ST[p.st+1]}</button>`:''}],pcl);
+  return page('الشحن','شحن السيارات على قطار الشمال بين الرياض والقريات، والطرود من قسم Explore في التطبيق')+
+    kpis([{l:'سيارات على رحلات اليوم وبكرة',v:cars.length},{l:'سيارات بانتظار الاستلام',v:cars.filter(c=>c.st===0).length},{l:'ملاحظات تلف',v:cars.filter(c=>c.damage).length,tone:'bad'},{l:'طرود نشطة',v:pcl.filter(p=>p.st<5).length}])+
+    `<div class="tabs"><button class="tab ${u.tab==='cars'?'on':''}" data-action="set" data-path="ui.cargo.tab" data-v="cars">السيارات</button><button class="tab ${u.tab==='pcl'?'on':''}" data-action="set" data-path="ui.cargo.tab" data-v="pcl">الطرود</button></div>`+body;
+};
+
+/* ---------- payments ---------- */
+const ADJ_K={refund:['استرجاع','warn'],comp:['تعويض','accent'],goodwill:['تعويض ودّي','info'],meal:['قسائم وجبات','neutral'],chargeback:['نزاع بنكي','bad'],recovery:['مطالبة على شريك','ok'],fee:['رسوم تعديل','ok']};
+V.payments=function(){
+  const u=S.ui.payments,n=NOW();
+  const paid=ORDERS.filter(o=>o.st!=='HOLD'&&o.st!=='EXP');
+  const todaySales=sumBy(paid.filter(o=>o.created>=DAY0),o=>o.total);
+  const pend=S.adj.filter(a=>(a.kind==='refund'||a.kind==='comp'||a.kind==='goodwill')&&a.status==='pending');
+  let body='';
+  if(u.tab==='tx'){
+    let rows;
+    if(u.type==='pay')rows=ORDERS_DESC.filter(o=>o.st!=='HOLD'&&o.st!=='EXP').map(o=>({t:o.created,k:'pay',o,amt:o.total,pm:o.pm,st:'تمت'}));
+    else{const adj=S.adj.filter(a=>!u.type||a.kind===u.type).map(a=>({t:a.t,k:a.kind,o:ORDER[a.order],amt:-a.amount*(a.kind==='recovery'||a.kind==='fee'?-1:1),pm:a.payer==='MASI'?'ماسي':payeeName(a.payer),st:a.status==='paid'?'مصروف':a.status==='open'?'مفتوح':'قيد الصرف',a}));rows=u.type?adj:adj.concat(ORDERS_DESC.slice(0,400).filter(o=>o.st!=='HOLD'&&o.st!=='EXP').map(o=>({t:o.created,k:'pay',o,amt:o.total,pm:o.pm,st:'تمت'})));}
+    rows.sort((a,b)=>b.t-a.t);
+    const pg=paginate(rows,'payments',25);
+    body=`<div class="filters">${sel('ui.payments.type',[['','الكل'],['pay','مدفوعات'],['refund','استرجاع'],['comp','تعويضات'],['goodwill','تعويض ودّي'],['meal','قسائم وجبات'],['chargeback','نزاعات بنكية'],['recovery','مطالبات على شركاء'],['fee','رسوم تعديل']],u.type)}</div>`+
+      table([{h:'الوقت',f:r=>dt(r.t)},{h:'النوع',f:r=>r.k==='pay'?badge('دفع','ok'):badge(ADJ_K[r.k][0],ADJ_K[r.k][1])},{h:'الطلب',f:r=>r.o?`<span class="mono">${r.o.id}</span>`:'<span class="faint">جماعي</span>'},{h:'الوسيلة أو الجهة',f:r=>esc(r.pm)},{h:'المبلغ',f:r=>`<span class="${r.amt<0?'bad-t':''}">${moneyT(r.amt)}</span>`,c:'num'},{h:'الحالة',f:r=>r.st}],pg.rows,{row:r=>r.o?`class="click" data-action="openOrder" data-id="${r.o.id}"`:''})+pg.html;
+  }else if(u.tab==='recon'){
+    const rows=[];for(let d=-3;d<=0;d++){const s=DAY0+d*DAYMS;['مدى','Apple Pay','فيزا','ماستركارد'].forEach(pm=>{const os=paid.filter(o=>o.pm===pm&&o.created>=s&&o.created<s+DAYMS);const ours=sumBy(os,o=>o.total);const mis=d===-1&&pm==='Apple Pay'&&!S.recon.checked?Math.round(os[0]?os[0].total:240):0;rows.push({d,pm,cnt:os.length,ours,bank:d===0?null:ours-mis,mis});});}
+    body=`<p class="xs muted">كل يوم نقارن عمليات ماسي مع كشف البنك لكل وسيلة دفع. كشف اليوم يوصل بكرة الصبح.</p>`+table([{h:'اليوم',f:r=>dayLabel(DAY0+r.d*DAYMS)},{h:'الوسيلة',f:r=>r.pm},{h:'العمليات',f:r=>num(r.cnt),c:'num'},{h:'عند ماسي',f:r=>money(r.ours),c:'num'},{h:'كشف البنك',f:r=>r.bank==null?'<span class="faint">ما وصل</span>':money(r.bank),c:'num'},{h:'الفرق',f:r=>r.bank==null?'':r.mis?`<span class="bad-t">${moneyT(r.mis)}</span>`:'0',c:'num'},{h:'الحالة',f:r=>r.bank==null?badge('بانتظار الكشف','neutral'):r.mis?`${badge('فرق','bad')} <button class="btn sm" data-action="recon">تحقق</button>`:badge('مطابق','ok')}],rows);
+  }else{
+    const q=S.adj.filter(a=>(a.kind==='refund'||a.kind==='comp'||a.kind==='goodwill')&&a.status==='pending').sort((a,b)=>a.t-b.t);
+    body=`<div class="row between mb-s"><span class="xs muted">لائحة هيئة النقل: الاسترجاع يُصرف خلال 14 يوم كحد أقصى.</span>${q.length&&can('finance')?`<button class="btn pri sm" data-action="payAll">صرف الكل (${q.length})</button>`:''}</div>`+
+      table([{h:'الرقم',f:a=>`<span class="mono">${a.id}</span>`},{h:'النوع',f:a=>badge(ADJ_K[a.kind][0],ADJ_K[a.kind][1])},{h:'الطلب',f:a=>`<span class="mono">${a.order}</span>`},{h:'المبلغ',f:a=>money(a.amount),c:'num'},{h:'يتحمّله',f:a=>payeeName(a.payer)},{h:'باقي على المهلة',f:a=>{const l=a.t+14*DAYMS-n;return l<2*DAYMS?`<span class="warn-t">${dur(l)}</span>`:dur(l);}},{h:'',f:a=>can('finance')?`<button class="btn sm" data-action="payOne" data-id="${a.id}">صرف</button>`:''}],q,{empty:'ما فيه مبالغ بانتظار الصرف'});
+  }
+  return page('المدفوعات والاسترجاع','كل ريال داخل وطالع، مع المطابقة اليومية مع البنك')+
+    kpis([{l:'مبيعات اليوم',v:moneyT(todaySales)},{l:'عمليات اليوم',v:num(paid.filter(o=>o.created>=DAY0).length)},{l:'بانتظار الصرف',v:pend.length,s:moneyT(sumBy(pend,a=>a.amount)),tone:pend.length?'warn':''},{l:'نزاعات بنكية مفتوحة',v:S.adj.filter(a=>a.kind==='chargeback'&&a.status==='open').length,tone:'bad'},{l:'ضريبة القيمة المضافة',v:'15٪',s:'مضمّنة في الأسعار'}])+
+    `<div class="tabs"><button class="tab ${u.tab==='tx'?'on':''}" data-action="set" data-path="ui.payments.tab" data-v="tx">العمليات</button><button class="tab ${u.tab==='recon'?'on':''}" data-action="set" data-path="ui.payments.tab" data-v="recon">المطابقة مع البنك</button><button class="tab ${u.tab==='queue'?'on':''}" data-action="set" data-path="ui.payments.tab" data-v="queue">قائمة الصرف</button></div>`+body;
+};
+
+/* ---------- settlement ---------- */
+function settlement(){
+  const P={};const get=k=>P[k]||(P[k]={k,gross:0,refunds:0,comp:0,rec:0,fees:0});
+  ORDERS.forEach(o=>{if(o.st==='HOLD'||o.st==='EXP')return;const op=opOf(oTrip(o));o.legs.forEach(l=>{get(legPayee(l,op)).gross+=l.price;});});
+  S.adj.forEach(a=>{
+    if(a.kind==='refund'&&a.split)for(const k in a.split)get(k).refunds+=a.split[k];
+    if(a.kind==='comp'||a.kind==='meal')get(a.payer).comp+=a.amount;
+    if(a.kind==='recovery')get(a.payer).rec+=a.amount;
+    if(a.kind==='fee')get(a.payer).fees+=a.amount;
+  });
+  const rows=Object.values(P).filter(p=>p.k!=='MASI').map(p=>{const rate=OPS[p.k]?S.trainShare:PARTNERS[p.k].com;const base=p.gross+p.fees-p.refunds;const com=r2(base*rate);return Object.assign(p,{rate,com,net:r2(base-com-p.comp-p.rec)});});
+  const gw=sumBy(S.adj.filter(a=>a.kind==='goodwill'),a=>a.amount),cb=sumBy(S.adj.filter(a=>a.kind==='chargeback'),a=>a.amount),rideComp=sumBy(S.adj.filter(a=>a.kind==='comp'&&a.payer==='MASI'),a=>a.amount);
+  const recov=sumBy(rows,r=>r.rec);
+  const masi={com:sumBy(rows,r=>r.com),gw,cb,rideComp,recov};masi.net=r2(masi.com+recov-gw-cb-rideComp);
+  return {rows,masi};
+}
+V.settle=function(){
+  const {rows,masi}=settlement();const fin=can('finance');
+  const ST_S={draft:['مسودة','neutral'],approved:['معتمدة','info'],paid:['مدفوعة','ok']};
+  return page('التسويات','مين يستحق كم من الدورة الحالية، بعد الاسترجاع والتعويضات وعمولة ماسي')+
+    kpis([{l:'إيراد ماسي من العمولات',v:moneyT(masi.com)},{l:'مستردّ من الشركاء',v:moneyT(masi.recov),tone:'ok'},{l:'تعويضات ودّية',v:moneyT(masi.gw),tone:'warn'},{l:'تعويضات على ماسي',v:moneyT(masi.rideComp),tone:'warn'},{l:'نزاعات بنكية',v:moneyT(masi.cb),tone:'bad'},{l:'صافي ماسي',v:moneyT(masi.net)}])+
+    table([
+      {h:'الجهة',f:r=>`<b>${payeeName(r.k)}</b><div class="xs faint">${OPS[r.k]?'ناقل':PARTNERS[r.k].kind}</div>`},{h:'المبيعات',f:r=>money(r.gross),c:'num'},{h:'رسوم تعديل',f:r=>r.fees?money(r.fees):'0',c:'num'},{h:'الاسترجاع',f:r=>`<span class="bad-t">${moneyT(-r.refunds)}</span>`,c:'num'},
+      {h:'عمولة ماسي',f:r=>`${moneyT(-r.com)} <span class="xs faint">${Math.round(r.rate*100)}٪</span>`,c:'num'},{h:'تعويضات عليه',f:r=>r.comp?`<span class="bad-t">${moneyT(-r.comp)}</span>`:'0',c:'num'},{h:'مطالبات عليه',f:r=>r.rec?`<span class="bad-t">${moneyT(-r.rec)}</span>`:'0',c:'num'},
+      {h:'الصافي المستحق',f:r=>`<b>${moneyT(r.net)}</b>`,c:'num'},
+      {h:'الحالة',f:r=>{const s=S.settle[r.k]||'draft';return badge(ST_S[s][0],ST_S[s][1])+(fin&&s==='draft'?` <button class="btn sm" data-action="settle" data-id="${r.k}" data-to="approved">اعتماد</button>`:'')+(fin&&s==='approved'?` <button class="btn sm pri" data-action="settle" data-id="${r.k}" data-to="paid">تحويل</button>`:'');}}
+    ],rows)+
+    `<div class="grid g2 mt">${card('قواعد التسوية',`<div class="alerts">${[['حصة ماسي من التذاكر','7٪ من قيمة التذاكر بعد الاسترجاع، حسب اتفاقية مشاركة الإيرادات'],['تعويض تأخير أو إلغاء من الناقل','يدفعه ماسي للعميل، وينخصم من مستحقات الناقل'],['فشل توصيلة','ماسي تعوّض العميل، وتسترد من الشريك حسب اتفاقية مستوى الخدمة'],['التعويض الودّي','على ماسي، لأنه قرار خدمة عملاء'],['النزاعات البنكية','على ماسي لين يُحسم النزاع']].map(([a,b])=>`<div class="alert"><span class="dot"></span><span class="t"><b>${a}</b><small>${b}</small></span></div>`).join('')}</div><p class="xs muted">النسب والقواعد افتراضية للنموذج.</p>`)}
+    ${card('ليش هذا مهم',`<p class="xs">كل تعويض تصرفه من شاشة الأعطال يظهر هنا في عمود "تعويضات عليه" عند الناقل الصح. وكل مطالبة على شريك تنخصم من مستحقاته. جرّب: شغّل تأخير 200 دقيقة على رحلة حرمين، طبّق التعويض، وارجع هنا.</p>`)}</div>`;
+};
+
+/* ---------- IAM ---------- */
+V.iam=function(){
+  const pg=paginate(S.users,'iam',20);
+  return page('المستخدمين والصلاحيات','1,200 مستخدم من ماسي وسار والحرمين، وكل دور يشوف اللي يخصه بس')+
+    `<div class="grid g2 mb">${card('المستخدمين حسب الدور',bars(Object.values(ROLES).map(r=>({l:r.n,v:r.count})))+`<p class="xs muted mt">المجموع ${num(sumBy(Object.values(ROLES),r=>r.count))}. التوزيع افتراضي.</p>`)}
+    ${card('حدود الدور',table([{h:'الدور',f:([,r])=>r.n},{h:'النطاق',f:([,r])=>r.scope==='ALL'?'كل الخطوط':OPS[r.scope]+' فقط'},{h:'استرجاع',f:([,r])=>r.refund?'<span class="chk">✓</span>':'<span class="x">لا</span>'},{h:'حد التعويض الودّي',f:([,r])=>r.goodwill===Infinity?'مفتوح':r.goodwill?moneyT(r.goodwill):'<span class="x">لا</span>'}],Object.entries(ROLES)))}</div>`+
+    card('مصفوفة الصلاحيات',`<div class="tbl"><table class="matrix"><thead><tr><th>الوحدة</th>${Object.values(ROLES).map(r=>`<th>${r.n}</th>`).join('')}</tr></thead><tbody>${MODULES.map(m=>`<tr><td>${m.n}</td>${Object.values(ROLES).map(r=>`<td>${r.mods==='*'||r.mods.includes(m.id)?'<span class="chk">✓</span>':'<span class="x">·</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`,'','mb')+
+    card('عينة من المستخدمين',table([{h:'المستخدم',f:x=>`<b>${esc(x.name)}</b><div class="xs faint mono">${x.id}</div>`},{h:'الدور',f:x=>ROLES[x.role].n},{h:'الجهة',f:x=>x.org},{h:'المحطة',f:x=>x.stn?ST[x.stn]:'<span class="faint">كل المحطات</span>'},{h:'آخر دخول',f:x=>rel(x.last)},{h:'التحقق الثنائي',f:x=>x.mfa?badge('مفعّل','ok'):badge('غير مفعّل','bad')},{h:'',f:x=>S.role==='admin'?`<button class="btn sm ${x.on?'':'danger'}" data-action="userToggle" data-id="${x.id}">${x.on?'نشط':'معطّل'}</button>`:(x.on?'نشط':'معطّل')}],pg.rows)+pg.html);
+};
+
+/* ---------- reports ---------- */
+V.reports=function(){
+  const paid=ORDERS.filter(o=>o.st!=='HOLD'&&o.st!=='EXP'&&o.st!=='CXL'&&scopeOk(opOf(oTrip(o))));
+  const byCh={};paid.forEach(o=>byCh[o.ch]=(byCh[o.ch]||0)+o.total);
+  const byLine={};paid.forEach(o=>{const l=oTrip(o).line;byLine[l]=(byLine[l]||0)+o.total;});
+  const dep=TRIPS.filter(t=>t.d===0&&['RUNNING','ARRIVED'].includes(tripState(t)));
+  const punct=Object.keys(LINES).map(l=>{const x=dep.filter(t=>t.line===l);return {l:LINES[l].n,v:x.length?Math.round(x.filter(t=>t.delay<=5).length/x.length*1000)/10:100};});
+  const byType={};S.cases.forEach(c=>byType[c.type]=(byType[c.type]||0)+1);
+  const comp=S.adj.filter(a=>a.kind==='comp');
+  const anc=sumBy(paid,o=>sumBy(o.legs.filter(l=>l.type!=='train'),l=>l.price));
+  return page('التقارير','المبيعات، والالتزام، والشكاوى، وتقرير هيئة النقل')+
+    kpis([{l:'المبيعات (الدورة)',v:moneyT(sumBy(paid,o=>o.total))},{l:'الطلبات',v:num(paid.length)},{l:'متوسط قيمة الطلب',v:moneyT(sumBy(paid,o=>o.total)/Math.max(1,paid.length))},{l:'إيراد غير التذاكر',v:Math.round(anc/Math.max(1,sumBy(paid,o=>o.total))*100)+'٪',s:'توصيلات ووجبات وإضافات'},{l:'طلبات فيها توصيلة',v:Math.round(paid.filter(o=>o.legs.some(l=>l.type==='ride')).length/Math.max(1,paid.length)*100)+'٪'}])+
+    `<div class="grid g2 mb">${card('المبيعات حسب القناة',bars(Object.entries(byCh).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({l:CH[k],v})),moneyT))}${card('المبيعات حسب الخط',bars(Object.entries(byLine).map(([k,v])=>({l:LINES[k].n,v})),moneyT))}
+    ${card('الالتزام بالمواعيد اليوم',bars(punct.map(p=>({l:p.l,v:p.v,tone:p.v<95?'warn':'ok'})),v=>v+'٪')+`<p class="xs muted mt">مرجع 2025 من هيئة الإحصاء: الحرمين 97.8٪، الشرق 96.1٪، الشمال 94.3٪.</p>`)}${card('حالات خدمة العملاء حسب النوع',bars(Object.entries(byType).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({l:k,v}))))}</div>`+
+    `<div class="grid g2">${card('تقرير هيئة النقل (الدورة الحالية)',table([{h:'البند',f:r=>r[0]},{h:'القيمة',f:r=>r[1],c:'num'}],[['الشكاوى المستلمة',num(S.cases.filter(c=>c.type==='شكوى').length)],['الشكاوى المغلقة',num(S.cases.filter(c=>c.type==='شكوى'&&c.st==='resolved').length)],['المطالبات المستلمة',num(S.cases.filter(c=>c.type==='مطالبة').length)],['التعويضات المصروفة (عدد)',num(comp.length)],['التعويضات (قيمة)',moneyT(sumBy(comp,a=>a.amount))],['استرجاعات تجاوزت 14 يوم','0']]))}
+    ${card('أداء الشركاء',table([{h:'الشريك',f:([,p])=>p.n},{h:'المستهدف',f:([,p])=>p.sla+'٪',c:'num'},{h:'الفعلي',f:([,p])=>`<span class="${p.actual<p.sla?'bad-t':'ok-t'}">${p.actual}٪</span>`,c:'num'},{h:'العمولة',f:([,p])=>p.com*100+'٪',c:'num'}],Object.entries(PARTNERS)))}</div>`;
+};
+
+/* ---------- audit ---------- */
+V.audit=function(){const pg=paginate(S.audit,'audit',30);return page('سجل التدقيق','كل عملية مالية أو تشغيلية: مين سوّاها ومتى')+table([{h:'الوقت',f:a=>dt(a.t)},{h:'المستخدم',f:a=>esc(a.who)},{h:'العملية',f:a=>esc(a.action)},{h:'الهدف',f:a=>`<span class="mono">${esc(a.target)}</span>`}],pg.rows)+pg.html;};
+
+/* ================= DRAWERS ================= */
+const D={};
+D.order=function(o){
+  const tl=trainLeg(o),t=TRIP[tl.trip],op=opOf(t),st=oStatus(o),adj=adjOf(o),dr=S.draft;
+  const depAt=stopTime(t,tl.from),hrs=(depAt-NOW())/HOUR;
+  const legHtml=o.legs.map(l=>{
+    if(l.type==='train'){const seats=[];for(let i=0;i<Math.min(o.pax,6);i++)seats.push(seatLabel(t,tl.cls,tl.seat+i));
+      return `<div class="leg train"><div class="leg-h"><b>قطار ${t.no} · ${CLASSES[l.cls]} · ${o.pax} راكب</b>${tripBadge(t)}</div><div>${ST[l.from]} ${timeCell(stopTime(t,l.from),t.delay,t.d)} ← ${ST[l.to]} ${timeCell(stopTime(t,l.to),t.delay,t.d)}</div><div class="xs muted">${seats.join(' · ')}${o.pax>6?' …':''}</div><div class="row between xs"><span>${LINES[t.line].sys}: <span class="mono">${l.pnr}</span>${l.missed?' '+badge('فاته القطار','bad'):''}</span><span>${l.fare} × ${o.pax} = ${money(l.price)}</span></div></div>`;}
+    if(l.type==='ride')return `<div class="leg ${PARTNERS[l.partner].cls}"><div class="leg-h"><b>${l.kind==='first'?'توصيلة إلى المحطة':'توصيلة من المحطة'} · ${PARTNERS[l.partner].n}</b>${rBadge(l,o)}</div><div>${l.kind==='first'?esc(l.addr)+' ← '+ST[l.st]:ST[l.st]+' ← '+esc(l.addr)}</div><div class="xs muted">الموعد ${dt(l.t)} · ${esc(l.driver)}${l.plate?' · '+l.plate:''}${l.fail?` · <span class="bad-t">تأخر ${l.failMins} د</span>`:''}</div><div class="row between xs"><span class="mono">${l.ref}</span>${money(l.price)}</div></div>`;
+    if(l.type==='rental')return `<div class="leg rental"><div class="leg-h"><b>تأجير سيارة · تلقاني</b>${l.cxl?badge('ملغى','neutral'):badge(l.resched?'أعيدت جدولته':'مؤكد',l.resched?'warn':'info')}</div><div>${l.car} · ${l.days} أيام · الاستلام من ${ST[l.st]} ${dt(l.t)}</div><div class="row between xs"><span class="mono">${l.ref}</span>${money(l.price)}</div></div>`;
+    if(l.type==='meal')return `<div class="leg meal"><div class="leg-h"><b>وجبات ومتجر · مزوّد التموين</b>${S.catering[t.id]?badge('عند الطاقم','ok'):badge('مجدول','neutral')}</div><div>${l.items.map(i=>MENU_BY[i.id].n+' × '+i.q).join('، ')}</div><div class="row between xs"><span class="mono">${l.ref}</span>${money(l.price)}</div></div>`;
+    return `<div class="leg extra"><div class="leg-h"><b>إضافات</b></div><div>${l.items.map(i=>i.n+' × '+i.q).join('، ')}</div><div class="row between xs"><span></span>${money(l.price)}</div></div>`;
+  }).join('');
+  const adjSum=sumBy(adj,a=>a.kind==='fee'?-a.amount:(a.kind==='chargeback'?0:a.amount));
+  const rulesTxt=op==='HHR'?(tl.cls==='ECO'?'اقتصادي الحرمين: إلغاء 20٪ قبل 24 ساعة، و50٪ بعدها لين 20 دقيقة. تعديل 10٪ ثم 20٪.':'أعمال الحرمين: إلغاء وتعديل مجاني قبل 24 ساعة، وبعدها إلغاء 35٪ وتعديل 10٪.')+' <span class="src">من المصادر</span>':'سار: التعديل لين ساعة قبل الرحلة، والإلغاء لين 24 ساعة، وبعدها سعر عدم الحضور. <span class="src">من المصادر</span> النسب <span class="assume">افتراضي</span>';
+  const active=o.st==='CONF'&&st==='CONF';
+  const acts=[];
+  if(active&&can('refund'))acts.push(`<button class="btn ${dr.panel==='cancel'?'pri':''}" data-action="panel" data-v="cancel">إلغاء واسترجاع</button>`,`<button class="btn ${dr.panel==='change'?'pri':''}" data-action="panel" data-v="change">تعديل الرحلة</button>`);
+  if(o.st==='HOLD'&&can('refund'))acts.push(`<button class="btn danger" data-action="releaseHold" data-id="${o.id}">إلغاء الحجز المؤقت</button>`);
+  if(role().goodwill>0&&['CONF','NOSHOW','CXL'].includes(o.st))acts.push(`<button class="btn ${dr.panel==='gw'?'pri':''}" data-action="panel" data-v="gw">تعويض ودّي</button>`);
+  if(['CONF'].includes(o.st))acts.push(`<button class="btn" data-action="resend" data-id="${o.id}">إعادة إرسال التذكرة</button>`);
+  if(modAllowed('cs'))acts.push(`<button class="btn" data-action="newCase" data-id="${o.id}">فتح حالة</button>`);
+  let panel='';
+  if(dr.panel==='cancel'&&active){const q=quoteCancel(o);panel=`<div class="sec"><h3>معاينة الإلغاء</h3><p class="xs muted">باقي ${hrs>0?dur(hrs*HOUR):'0'} على مغادرة القطار من ${ST[tl.from]}.</p>`+table([{h:'المكوّن',f:x=>x.label},{h:'المدفوع',f:x=>money(x.paid),c:'num'},{h:'الرسوم',f:x=>x.fee?`<span class="bad-t">${moneyT(x.fee)}</span>`:'0',c:'num'},{h:'المسترد',f:x=>money(x.refund),c:'num'},{h:'القاعدة',f:x=>`<span class="xs">${x.note}</span> ${x.src==='src'?'<span class="src">مصدر</span>':x.src?'<span class="assume">افتراضي</span>':''}`}],q.lines)+`<div class="row between mt"><b>إجمالي المسترد: ${money(q.total)}</b>${q.allowed?`<button class="btn pri" data-action="confirmCancel" data-id="${o.id}">تأكيد الإلغاء</button>`:`<span class="bad-t xs">الإلغاء ممنوع حسب قواعد الناقل</span>`}</div></div>`;}
+  if(dr.panel==='change'&&active){const fee=changeFee(o,hrs);const alts=altTrips(o,(op==='HHR'?20:60)*MIN).slice(0,8);panel=`<div class="sec"><h3>تعديل الرحلة</h3>`+(fee===null?'<p class="bad-t xs">التعديل ممنوع، الوقت المتبقي أقل من المسموح.</p>':`<p class="xs muted">رسوم التعديل: <b>${moneyT(fee)}</b>. نفس المسار والدرجة. التوصيلات تتحرك تلقائياً مع الموعد الجديد.</p>`+table([{h:'الرحلة',f:x=>`<span class="mono">${x.no}</span>`},{h:'المغادرة',f:x=>dt(stopTime(x,tl.from))},{h:'متاح',f:x=>avail(x,tl.cls),c:'num'},{h:'',f:x=>`<button class="btn sm pri" data-action="confirmChange" data-id="${o.id}" data-trip="${x.id}">اختيار</button>`}],alts,{empty:'ما فيه رحلات بديلة متاحة'}))+`</div>`;}
+  if(dr.panel==='gw'){const lim=role().goodwill;panel=`<div class="sec"><h3>تعويض ودّي</h3><p class="xs muted">حدك ${lim===Infinity?'مفتوح':moneyT(lim)}. اللي فوقه يحتاج موافقة مشرف.</p><div class="row"><input id="f-gw" type="number" min="5" placeholder="المبلغ" data-bind="draft.gwAmt" data-on="none" value="${esc(dr.gwAmt||'')}">${sel('draft.gwReason',GW_REASONS.map(x=>[x,x]),dr.gwReason||GW_REASONS[0],'data-on="none"')}<button class="btn pri" data-action="confirmGw" data-id="${o.id}">صرف</button></div></div>`;}
+  return {title:'الطلب '+o.id,body:
+    `<div class="sec"><div class="row between"><div class="row">${oBadge(o)}<span class="tag">${CH[o.ch]}</span><span class="tag">${o.pax} راكب</span>${o.prm?badge(o.prm,'info'):''}</div>${o.st==='HOLD'?`<span class="warn-t xs">ينتهي خلال <span data-cd="${o.holdUntil}"></span></span>`:''}</div>
+     <dl class="kv mt"><dt>العميل</dt><dd>${esc(o.name)}</dd><dt>الجوال</dt><dd class="mono">${maskPhone(o.phone)}</dd><dt>الهوية</dt><dd class="mono">${maskId(o.nid)}</dd><dt>أُنشئ</dt><dd>${dt(o.created)}</dd></dl></div>`+
+    `<div class="sec"><div class="row between"><h3>الرحلة كاملة</h3>${legendHtml}</div><div class="journey">${legHtml}</div></div>`+
+    `<div class="sec"><h3>الدفع</h3><dl class="kv"><dt>الوسيلة</dt><dd>${esc(o.pm)}</dd><dt>الإجمالي</dt><dd>${money(o.total)} <span class="xs faint">شامل الضريبة ${moneyT(o.total-o.total/1.15)}</span></dd>${adj.map(a=>`<dt>${ADJ_K[a.kind][0]}</dt><dd>${money(a.kind==='fee'?a.amount:-a.amount)} <span class="xs faint">${a.status==='paid'?'مصروف':a.status==='open'?'مفتوح':'قيد الصرف'} · على ${payeeName(a.payer)}${a.note?' · '+esc(a.note):''}</span></dd>`).join('')}${adj.length?`<dt>الصافي</dt><dd><b>${money(o.total-adjSum)}</b></dd>`:''}</dl></div>`+
+    `<div class="note"><b>القواعد المنطبقة:</b> ${rulesTxt}</div>`+
+    (acts.length?`<div class="row">${acts.join('')}</div>`:'')+panel+
+    `<div class="sec"><h3>السجل</h3><div class="hist">${histOf(o).map(h=>`<div><span class="w xs">${dt(h.t)}</span><span><b>${esc(h.by)}</b>: ${esc(h.m)}</span></div>`).join('')}</div></div>`};
+};
+function histOf(o){const tl=trainLeg(o),t=TRIP[tl.trip0||tl.trip];const base=[{t:o.created,by:'النظام',m:'إنشاء الطلب عبر '+CH[o.ch]}];if(o.st!=='HOLD'&&o.st!=='EXP'){base.push({t:o.created+90e3,by:'بوابة الدفع',m:'تم الدفع: '+o.pm});base.push({t:o.created+150e3,by:LINES[t.line].sys,m:'إصدار التذكرة '+tl.pnr});o.legs.forEach(l=>{if(l.type==='ride'||l.type==='rental')base.push({t:o.created+200e3,by:PARTNERS[l.partner].n,m:'تأكيد الحجز '+l.ref});});}else base.push({t:o.created+5e3,by:LINES[t.line].sys,m:'حجز مؤقت للمقاعد 15 دقيقة'});return base.concat(o.h).sort((a,b)=>a.t-b.t);}
+D.trip=function(t){
+  const os=BY_TRIP[t.id],ed=can('editInv'),dr=S.draft;
+  if(!dr.q)dr.q=Object.assign({},t.quota);
+  const conf=os.filter(o=>o.st==='CONF');
+  return {title:'الرحلة '+t.no,body:
+    `<div class="sec"><div class="row between"><div class="row">${lineChip(t.line)}${tripBadge(t)}<span class="tag">رصيف ${t.platform}</span></div><span class="xs muted">${LINES[t.line].sys} · ${OPS[opOf(t)]}</span></div><ul class="stops mt">${t.stops.map((s,i)=>`<li><span class="sdot"></span><b>${ST[s]}</b><span>${timeCell(t.times[i],t.delay,t.d)}</span></li>`).join('')}</ul></div>`+
+    `<div class="sec"><h3>المقاعد حسب الدرجة</h3>`+table([{h:'الدرجة',f:c=>CLASSES[c]},{h:'السعة',f:c=>t.cap[c],c:'num'},{h:'المباع',f:c=>t.sold[c],c:'num'},{h:'محجوب',f:c=>t.blocked[c],c:'num'},{h:'متاح',f:c=>avail(t,c),c:'num'},{h:'',f:c=>ed?`<span class="row"><input id="f-bl-${c}" type="number" min="1" style="width:70px" data-bind="draft.block.${c}" data-on="none" value="${esc((dr.block||{})[c]||'')}"><button class="btn sm" data-action="block" data-id="${t.id}" data-cls="${c}">حجب</button></span>`:''}],Object.keys(t.cap))+`<p class="xs muted mt">الحجب للصيانة، أو ذوي الإعاقة، أو الوفود الرسمية.</p></div>`+
+    `<div class="sec"><h3>حصص قنوات البيع</h3>`+table([{h:'القناة',f:c=>CH[c]},{h:'الحصة',f:c=>ed?`<input id="f-q-${c}" type="number" min="0" style="width:80px" data-bind="draft.q.${c}" data-on="none" value="${dr.q[c]}">`:t.quota[c],c:'num'},{h:'المباع',f:c=>t.soldCh[c]||0,c:'num'},{h:'المتبقي',f:c=>{const r=t.quota[c]-(t.soldCh[c]||0);return r<0?`<span class="bad-t">${r}</span>`:r;},c:'num'}],Object.keys(t.quota))+(ed?`<div class="row mt"><button class="btn pri" data-action="saveQuota" data-id="${t.id}">حفظ الحصص</button><span class="xs muted">المجموع لازم ما يتجاوز ${sumObj(t.cap)}</span></div>`:'')+`</div>`+
+    `<div class="sec"><h3>الطلبات</h3><p class="xs">${conf.length} مؤكد · ${os.filter(o=>o.st==='HOLD').length} معلّق · ${os.filter(o=>o.st==='CXL').length} ملغي · ${conf.filter(o=>o.legs.some(l=>l.type==='ride')).length} فيها توصيلة · ${conf.filter(o=>o.legs.some(l=>l.type==='meal')).length} فيها وجبات</p><div class="row">${modAllowed('orders')?`<button class="btn" data-action="goF" data-r="orders" data-path="ui.orders.trip" data-v="${t.id}">عرض الطلبات</button>`:''}${modAllowed('stations')?`<button class="btn" data-action="toManifest" data-id="${t.id}">قائمة الركاب</button>`:''}${modAllowed('disrupt')&&!t.cancelled&&tripState(t)!=='ARRIVED'?`<button class="btn pri" data-action="toDisrupt" data-id="${t.id}">محاكاة تأخير أو إلغاء</button>`:''}</div></div>`};
+};
+D['case']=function(c){
+  const o=c.order?ORDER[c.order]:null,dr=S.draft;
+  const targets=[];if(o){targets.push(opOf(oTrip(o)));o.legs.forEach(l=>{if((l.type==='ride'||l.type==='rental')&&!targets.includes(l.partner))targets.push(l.partner);});if(o.legs.some(l=>l.type==='meal'))targets.push('CATER');}
+  const left=slaLeft(c);
+  return {title:'الحالة '+c.id,body:
+    `<div class="sec"><div class="row">${badge(c.type,'accent')}${badge(c.pri==='عالية'?'أولوية عالية':'أولوية '+c.pri,c.pri==='عالية'?'bad':'neutral')}<span class="tag">${c.ch}</span>${c.st==='resolved'?badge('محلولة','ok'):left<0?badge('متجاوزة المدة '+dur(left),'bad'):badge('باقي '+dur(left),'info')}</div><dl class="kv mt"><dt>العميل</dt><dd>${esc(c.name)}</dd><dt>المسؤول</dt><dd>${c.agent?esc(c.agent):'غير معيّنة'}</dd><dt>مدة الرد</dt><dd>${c.sla} ساعة لنوع "${c.type}"</dd>${c.esc?`<dt>مصعّدة إلى</dt><dd>${payeeName(c.esc)}</dd>`:''}</dl>${o?`<div class="row mt"><button class="btn sm" data-action="openOrder" data-id="${o.id}">فتح الطلب ${o.id}</button>${oBadge(o)}</div>`:''}</div>`+
+    `<div class="sec"><h3>المحادثة</h3><div class="msgs">${c.msgs.map(m=>`<div class="msg ${m.by==='العميل'?'':'me'}"><small>${esc(m.by)} · ${dt(m.t)}</small>${esc(m.m)}</div>`).join('')}</div>${c.st!=='resolved'?`<div class="mt"><textarea id="f-note" placeholder="رد على العميل" data-bind="draft.note" data-on="none">${esc(dr.note||'')}</textarea><div class="row mt"><button class="btn" data-action="caseReply" data-id="${c.id}">إرسال الرد</button></div></div>`:''}</div>`+
+    (c.st!=='resolved'?`<div class="sec"><h3>الإجراءات</h3><div class="row">${c.agent?'':`<button class="btn" data-action="caseAssign" data-id="${c.id}">تعيين لي</button>`}${targets.map(k=>`<button class="btn" data-action="caseEsc" data-id="${c.id}" data-to="${k}">تصعيد إلى ${payeeName(k)}</button>`).join('')}${o&&role().goodwill>0?`<button class="btn" data-action="openOrderGw" data-id="${o.id}">تعويض ودّي</button>`:''}</div><div class="mt"><textarea id="f-res" placeholder="ملخص الحل" data-bind="draft.res" data-on="none">${esc(dr.res||'')}</textarea><div class="row mt"><button class="btn pri" data-action="caseResolve" data-id="${c.id}">إغلاق كمحلولة</button></div></div></div>`:`<div class="okbox"><b>الحل:</b> ${esc(c.res)}</div>`)};
+};
+D.partner=function(k){
+  const p=PARTNERS[k];const rs=ridesToday().filter(r=>r.l.partner===k);
+  const rec=S.adj.filter(a=>(a.kind==='recovery'||a.kind==='comp')&&a.payer===k);
+  const days=[...Array(7)].map((_,i)=>({l:dayLabel(DAY0-(6-i)*DAYMS),v:Math.round((p.actual+((hashStr(k+i)%40)-20)/10)*10)/10}));
+  return {title:p.n,body:
+    `<div class="sec"><dl class="kv"><dt>النوع</dt><dd>${p.kind}</dd><dt>عمولة ماسي</dt><dd>${p.com*100}٪</dd><dt>مستوى الخدمة</dt><dd>المستهدف ${p.sla}٪ · الفعلي <span class="${p.actual<p.sla?'bad-t':'ok-t'}">${p.actual}٪</span></dd><dt>الربط</dt><dd>${p.api==='ok'?badge('سليم','ok'):badge('بطء في الاستجابة','warn')}</dd><dt>الغرامة</dt><dd>عند فوات القطار بسببه: قيمة التوصيلة + تعويض العميل <span class="assume">افتراضي</span></dd></dl></div>`+
+    `<div class="sec"><h3>مستوى الخدمة آخر 7 أيام</h3>${bars(days.map(d=>({l:d.l,v:d.v,tone:d.v<p.sla?'warn':'ok'})),v=>v+'٪')}</div>`+
+    (k!=='CATER'?`<div class="sec"><h3>اليوم</h3><div class="ikpis"><div class="ikpi"><b>${rs.length}</b><span>حجز</span></div><div class="ikpi"><b>${rs.filter(r=>rideState(r.l,r.o)==='DONE').length}</b><span>اكتمل</span></div><div class="ikpi"><b>${rs.filter(r=>rideState(r.l,r.o)==='FAILED').length}</b><span>فشل</span></div><div class="ikpi"><b>${rs.filter(r=>r.l.resched).length}</b><span>أعيدت جدولته</span></div></div></div>`:'')+
+    `<div class="sec"><h3>مطالبات وتعويضات عليه</h3>${table([{h:'الرقم',f:a=>`<span class="mono">${a.id}</span>`},{h:'النوع',f:a=>ADJ_K[a.kind][0]},{h:'الطلب',f:a=>`<span class="mono">${a.order||''}</span>`},{h:'المبلغ',f:a=>money(a.amount),c:'num'},{h:'الوقت',f:a=>rel(a.t)}],rec,{empty:'ما فيه مطالبات مسجلة'})}</div>`};
+};
+
+/* ================= render ================= */
+function renderNav(){
+  const groups={};MODULES.filter(m=>modAllowed(m.id)).forEach(m=>(groups[m.g]=groups[m.g]||[]).push(m));
+  const badgeFor=id=>{if(id==='disrupt'){const n=S.disruptions.filter(d=>!dDone(d)).length;return n?n:'';}if(id==='cs'){const n=S.cases.filter(c=>c.st!=='resolved'&&slaLeft(c)<0).length;return n?n:'';}return '';};
+  $('#nav').innerHTML=Object.entries(groups).map(([g,ms])=>`<div class="ng">${g}</div>`+ms.map(m=>{const b=badgeFor(m.id);return `<button class="nl ${S.route===m.id?'on':''}" data-action="go" data-r="${m.id}"><span>${m.n}</span>${b?`<span class="cnt">${b}</span>`:''}</button>`;}).join('')).join('')+
+    `<div class="ng">عن النموذج</div><div class="xs muted" style="padding:0 10px">الدور الحالي: <b>${role().n}</b>. النطاق: ${role().scope==='ALL'?'كل الخطوط':OPS[role().scope]}.</div>`;
+}
+function render(){
+  const ae=document.activeElement,fid=ae&&ae.id&&ae.id!=='gq'?ae.id:null;let selr=null;try{if(fid&&ae.selectionStart!=null)selr=[ae.selectionStart,ae.selectionEnd];}catch(e){}
+  if(!modAllowed(S.route)){S.route=firstAllowed();history.replaceState(null,'','#'+S.route);}
+  renderNav();
+  $('#main').innerHTML=V[S.route]();
+  if(S.drawer)renderDrawer();
+  if(fid){const el=document.getElementById(fid);if(el){el.focus();if(selr)try{el.setSelectionRange(selr[0],selr[1]);}catch(e){}}}
+  tick();
+}
+function renderDrawer(){
+  const {k,id}=S.drawer;const obj=k==='order'?ORDER[id]:k==='trip'?TRIP[id]:k==='case'?S.cases.find(c=>c.id===id):id;
+  if(!obj){closeDrawer();return;}
+  const body=$('#drawerBody'),st=body.scrollTop,r=D[k](obj);
+  $('#drawerTitle').textContent=r.title;body.innerHTML=r.body;body.scrollTop=st;
+  $('#drawer').classList.add('open');$('#drawer').setAttribute('aria-hidden','false');
+}
+function openDrawer(k,id,keep){S.drawer={k,id};if(!keep)S.draft={block:{}};$('#drawerBody').scrollTop=0;renderDrawer();}
+function closeDrawer(){S.drawer=null;$('#drawer').classList.remove('open');$('#drawer').setAttribute('aria-hidden','true');}
+function setPath(path,v){const p=path.split('.');let o=S;for(let i=0;i<p.length-1;i++){if(o[p[i]]==null)o[p[i]]={};o=o[p[i]];}o[p[p.length-1]]=v;}
+function go(r){if(location.hash!=='#'+r)location.hash=r;else{S.route=r;render();}document.body.classList.remove('nav-open');}
+
+/* ================= actions ================= */
+const HOOKS={
+  'ui.disrupt.type':v=>{S.ui.disrupt.mins=v==='ride'?60:150;},
+  role:()=>{closeDrawer();audit('تبديل الدور',role().n);}
+};
+const A={};
+A.go=d=>go(d.r);
+A.goF=d=>{setPath(d.path,d.v);const m=d.path.match(/^ui\.(\w+)\./);if(m&&'page' in S.ui[m[1]])S.ui[m[1]].page=1;closeDrawer();go(d.r);};
+A.set=d=>{setPath(d.path,d.v);const m=d.path.match(/^ui\.(\w+)\./);if(m&&'page' in S.ui[m[1]])S.ui[m[1]].page=1;render();};
+A.page=d=>{S.ui[d.key].page=+d.p;render();window.scrollTo({top:0});};
+A.toggleNav=()=>document.body.classList.toggle('nav-open');
+A.theme=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';};
+A.hideIntro=()=>{S.introHidden=true;render();};
+A.closeDrawer=closeDrawer;
+A.openOrder=d=>openDrawer('order',d.id);
+A.openTrip=d=>openDrawer('trip',d.id);
+A.openCase=d=>openDrawer('case',d.id);
+A.openPartner=d=>openDrawer('partner',d.id);
+A.openOrderGw=d=>{openDrawer('order',d.id);S.draft.panel='gw';renderDrawer();};
+A.panel=d=>{S.draft.panel=S.draft.panel===d.v?null:d.v;renderDrawer();};
+A.toManifest=d=>{const t=TRIP[d.id];S.ui.stations.st=t.stops[0];S.ui.stations.trip=t.id;S.ui.stations.tab='board';closeDrawer();go('stations');};
+A.toDisrupt=d=>{S.ui.disrupt.type='delay';S.ui.disrupt.trip=d.id;S.ui.disrupt.mins=150;closeDrawer();go('disrupt');};
+
+A.confirmCancel=d=>{
+  const o=ORDER[d.id],q=quoteCancel(o);if(!q.allowed&&S.role!=='admin')return toast('الإلغاء ممنوع حسب قواعد الناقل','bad');
+  const split={};q.lines.forEach(x=>{if(x.refund>0)split[x.payee]=r2((split[x.payee]||0)+x.refund);});
+  o.st='CXL';releaseSeats(o);o.legs.forEach(l=>{if(l.type==='ride'||l.type==='rental')l.cxl=true;});
+  if(q.total>0)addAdj({kind:'refund',order:o.id,amount:q.total,split,payer:'MASI',note:'إلغاء بطلب العميل'});
+  hist(o,role().n,`إلغاء الطلب، المسترد ${moneyT(q.total)}`);audit('إلغاء طلب واسترجاع '+moneyT(q.total),o.id);notif('ticket',1,o.id);
+  S.draft.panel=null;toast('انلغى الطلب، والمبلغ في قائمة الصرف');render();
+};
+A.confirmChange=d=>{
+  const o=ORDER[d.id],nt=TRIP[d.trip],tl=trainLeg(o),hrs=(stopTime(oTrip(o),tl.from)-NOW())/HOUR,fee=changeFee(o,hrs);
+  if(fee===null)return toast('التعديل ممنوع','bad');
+  const old=oTrip(o).no,delta=moveOrder(o,nt);anchorRides(o,true);
+  if(fee>0)addAdj({kind:'fee',order:o.id,amount:fee,payer:opOf(nt),status:'paid',note:'رسوم تعديل'});
+  hist(o,role().n,`نقل من ${old} إلى ${nt.no}${fee?'، رسوم '+moneyT(fee):''}. التوصيلات تحركت ${Math.round(delta/MIN)} د`);audit('تعديل رحلة',o.id+' → '+nt.no);
+  S.draft.panel=null;toast('تم النقل إلى '+nt.no+' والتوصيلات تعدّلت');render();
+};
+A.confirmGw=d=>{
+  const o=ORDER[d.id],amt=+S.draft.gwAmt,lim=role().goodwill;
+  if(!amt||amt<=0)return toast('اكتب المبلغ','bad');
+  if(amt>lim)return toast(`المبلغ يتجاوز حدك (${moneyT(lim)})، يحتاج موافقة مشرف`,'bad');
+  addAdj({kind:'goodwill',order:o.id,amount:amt,payer:'MASI',note:S.draft.gwReason||GW_REASONS[0]});
+  hist(o,role().n,'تعويض ودّي '+moneyT(amt));audit('تعويض ودّي '+moneyT(amt),o.id);S.draft.panel=null;S.draft.gwAmt='';toast('انضاف التعويض لقائمة الصرف');render();
+};
+A.releaseHold=d=>{const o=ORDER[d.id];o.st='EXP';releaseSeats(o);hist(o,role().n,'إلغاء الحجز المؤقت، المقاعد رجعت للبيع');audit('إلغاء حجز مؤقت',o.id);render();};
+A.resend=d=>{const o=ORDER[d.id];notif('ticket',1,o.id);hist(o,role().n,'إعادة إرسال التذكرة');audit('إعادة إرسال تذكرة',o.id);toast('انرسلت التذكرة');render();};
+A.newCase=d=>{const o=ORDER[d.id];const c=newCase('استفسار',o,NOW(),'حالة فتحها '+role().n,'هاتف');c.agent=role().n;c.st='progress';audit('فتح حالة',c.id);closeDrawer();go('cs');setTimeout(()=>openDrawer('case',c.id),0);};
+A.board=d=>{S.boarded.add(d.key);audit('تسجيل صعود',d.key);render();};
+A.bag=d=>{const o=ORDER[d.id],tl=trainLeg(o);const bought=sumBy(o.legs.filter(l=>l.type==='extra').flatMap(l=>l.items).filter(i=>i.k==='bag'),i=>i.q);const allow=ALLOW[tl.cls]+bought*23;const w=allow+ri(-8,9);S.bags[o.id]={w,allow,fee:Math.max(0,w-allow)*10};hist(o,role().n,`تسجيل أمتعة ${w} كجم`);render();};
+A.prm=d=>{S.prmDone.add(d.id);hist(ORDER[d.id],role().n,'تم ترتيب المساعدة الخاصة');render();};
+A.sendCatering=d=>{S.catering[d.id]=NOW();audit('إرسال قائمة التموين',TRIP[d.id].no);toast('وصلت القائمة لطاقم التموين');render();};
+A.cargoNext=d=>{const it=(d.kind==='car'?S.cars:S.parcels).find(x=>x.id===d.id);if(it&&it.st<5){it.st++;audit('تحديث شحنة',it.id);}render();};
+A.menuToggle=d=>{const m=MENU_BY[d.id];m.on=!m.on;audit(m.on?'تفعيل صنف':'إيقاف صنف',m.n);render();};
+A.promo=d=>{const p=S.promos.find(x=>x.code===d.id);p.on=!p.on;audit(p.on?'تفعيل كود':'إيقاف كود',p.code);render();};
+A.saveFares=()=>{audit('اعتماد أسعار جديدة',Object.entries(S.rate).map(([k,v])=>k+':'+v).join(' '));toast('اعتُمدت الأسعار للحجوزات الجديدة');};
+A.block=d=>{const t=TRIP[d.id],n=+((S.draft.block||{})[d.cls]||0);if(!n||n<1)return toast('اكتب العدد','bad');if(n>avail(t,d.cls))return toast('العدد أكبر من المتاح','bad');t.blocked[d.cls]+=n;S.draft.block[d.cls]='';audit(`حجب ${n} مقعد ${CLASSES[d.cls]}`,t.no);toast('انحجبت المقاعد');render();};
+A.saveQuota=d=>{const t=TRIP[d.id],q={};for(const k in S.draft.q)q[k]=Math.max(0,+S.draft.q[k]||0);if(sumObj(q)>sumObj(t.cap))return toast(`المجموع ${sumObj(q)} أكبر من السعة ${sumObj(t.cap)}`,'bad');t.quota=q;audit('تحديث حصص القنوات',t.no);toast('انحفظت الحصص');render();};
+A.caseReply=d=>{const c=S.cases.find(x=>x.id===d.id),m=(S.draft.note||'').trim();if(!m)return toast('اكتب الرد','bad');c.msgs.push({by:role().n,t:NOW(),m});if(c.st==='open')c.st='progress';if(!c.agent)c.agent=role().n;S.draft.note='';audit('رد على حالة',c.id);render();};
+A.caseAssign=d=>{const c=S.cases.find(x=>x.id===d.id);c.agent=role().n;c.st='progress';audit('تعيين حالة',c.id);render();};
+A.caseEsc=d=>{const c=S.cases.find(x=>x.id===d.id);c.st='escalated';c.esc=d.to;c.msgs.push({by:'النظام',t:NOW(),m:'تصعيد إلى '+payeeName(d.to)});audit('تصعيد إلى '+payeeName(d.to),c.id);toast('تصعّدت الحالة');render();};
+A.caseResolve=d=>{const c=S.cases.find(x=>x.id===d.id),r=(S.draft.res||'').trim();if(!r)return toast('اكتب ملخص الحل','bad');c.st='resolved';c.res=r;c.agent=c.agent||role().n;audit('إغلاق حالة',c.id);toast('انقفلت الحالة');render();};
+A.payOne=d=>{const a=S.adj.find(x=>x.id===d.id);a.status='paid';audit('صرف '+ADJ_K[a.kind][0]+' '+moneyT(a.amount),a.order);render();};
+A.payAll=()=>{let n=0,s=0;S.adj.forEach(a=>{if((a.kind==='refund'||a.kind==='comp'||a.kind==='goodwill')&&a.status==='pending'){a.status='paid';n++;s+=a.amount;}});audit(`صرف جماعي ${n} عملية`,moneyT(s));toast(`انصرف ${n} مبلغ بإجمالي ${moneyT(s)}`);render();};
+A.recon=()=>{S.recon.checked=true;audit('حل فرق مطابقة','Apple Pay أمس');toast('العملية كانت في كشف اليوم التالي، والفرق انحل');render();};
+A.settle=d=>{S.settle[d.id]=d.to;audit(d.to==='paid'?'تحويل مستحقات':'اعتماد تسوية',payeeName(d.id));render();};
+A.userToggle=d=>{const u=S.users.find(x=>x.id===d.id);u.on=!u.on;audit(u.on?'تفعيل مستخدم':'تعطيل مستخدم',u.id);render();};
+A.testSend=d=>{notif(d.id,1,'إرسال تجريبي');audit('إرسال تجريبي',TPL(d.id).n);toast('انرسل');render();};
+
+A.simulate=()=>{
+  const u=S.ui.disrupt;
+  if(u.type==='ride'){
+    const o=ORDER[u.order];if(!o)return toast('اختر طلب','bad');
+    const r=o.legs[0],tl=trainLeg(o),t=TRIP[tl.trip],mins=Math.max(5,+u.mins||0);
+    const arrive=r.t+mins*MIN+25*MIN,close=stopTime(t,tl.from)+t.delay*MIN-10*MIN;
+    if(arrive<=close)return toast('بهذا التأخير يلحق القطار، زِد الدقائق','bad');
+    r.fail=true;r.failMins=mins;tl.missed=true;tl.trip0=t.id;
+    hist(o,PARTNERS[r.partner].n,`السائق تأخر ${mins} دقيقة`);hist(o,'النظام',`فات الراكب قطار ${t.no}`);
+    const c=newCase('مطالبة',o,NOW(),`سائق ${PARTNERS[r.partner].n} تأخر ${mins} دقيقة وفاتني القطار`,'تطبيق');c.pri='عالية';
+    const d={id:'D-'+(101+S.disruptions.length),t:NOW(),type:'ride',order:o.id,ride:r,trip0:t.id,mins,done:{},caseId:c.id,op:opOf(t)};
+    S.disruptions.unshift(d);audit('محاكاة: تأخر توصيلة وفوات قطار',o.id);toast('انفتحت حالة '+c.id+' تلقائياً');render();return;
+  }
+  const t=TRIP[u.trip];if(!t)return toast('اختر رحلة','bad');
+  const os=BY_TRIP[t.id].filter(o=>o.st==='CONF'&&trainLeg(o).trip===t.id),holds=BY_TRIP[t.id].filter(o=>o.st==='HOLD').length;
+  let mins=0;
+  if(u.type==='cancel'){t.cancelled=true;}else{mins=Math.max(5,+u.mins||0);t.delay=mins;}
+  const d={id:'D-'+(101+S.disruptions.length),t:NOW(),type:u.type,trip:t.id,mins,reason:u.reason,orders:os.map(o=>o.id),holds,done:{},op:opOf(t)};
+  S.disruptions.unshift(d);audit(u.type==='cancel'?'محاكاة: إلغاء رحلة':`محاكاة: تأخير ${mins} د`,t.no);toast(`${os.length} طلب متأثر`);render();
+};
+function doStep(d,step){
+  const I=dImpact(d),t=I.t,op=d.op;
+  if(step==='notify'){notif(d.type==='cancel'?'cancel':'delay',I.os.length+d.holds,t.no);I.os.forEach(o=>hist(o,'ماسي',d.type==='cancel'?'إبلاغ العميل بإلغاء الرحلة':`إبلاغ العميل بتأخير ${d.mins} د`));d.done.notify=true;}
+  else if(step==='resched'){let c=0;I.os.forEach(o=>{let k=0;if(d.type==='cancel'&&(d.done.refund||trainLeg(o).trip===t.id)){o.legs.forEach(l=>{if((l.type==='ride'||l.type==='rental')&&!l.fail&&(l.kind!=='first'||l.t>NOW())){l.cxl=true;k++;}});if(k)hist(o,'ماسي','إلغاء التوصيلات عند الشركاء');}else{k=anchorRides(o,true);if(k)hist(o,'ماسي','تعديل التوصيلات مع الشركاء حسب الموعد الجديد');}c+=k;});notif('ride',c,t.no);d.done.resched=c;}
+  else if(step==='meals'){addAdj({kind:'meal',amount:I.pax*15,payer:op,status:'paid',note:'قسائم وجبات '+t.no});notif('meal',I.pax,t.no);d.done.meals=true;}
+  else if(step==='comp'){let s=0;I.os.forEach(o=>{const a=r2(trainLeg(o).price*I.tier);if(a>0){addAdj({kind:'comp',order:o.id,amount:a,payer:op,note:(d.type==='cancel'?'تعويض إلغاء':'تعويض تأخير')+' حسب لائحة هيئة النقل'});hist(o,'ماسي','تعويض '+moneyT(a));s+=a;}});notif('comp',I.os.length,t.no);d.done.comp=true;}
+  else if(step==='rebook'){let moved=0,left=0;I.os.forEach(o=>{const tl=trainLeg(o);const nt=TRIPS.find(x=>x.line===t.line&&x.dir===t.dir&&x.dep>t.dep&&!x.cancelled&&avail(x,tl.cls)>=o.pax);if(nt){moveOrder(o,nt);tl.trip0=t.id;hist(o,'ماسي',`إعادة حجز على ${nt.no} بسبب إلغاء ${t.no}`);moved++;}else left++;});d.done.rebook={moved,left};}
+  else if(step==='refund'){I.os.forEach(o=>{const split={};o.legs.forEach(l=>{if(l.cxl)return;const p=legPayee(l,op);split[p]=r2((split[p]||0)+l.price);});o.st='CXL';releaseSeats(o);addAdj({kind:'refund',order:o.id,amount:o.total,split,payer:'MASI',note:'إلغاء من الناقل: استرداد كامل'});hist(o,'ماسي','استرداد كامل بسبب إلغاء الرحلة');});d.done.refund=true;}
+  audit('خطوة عطل: '+step,d.id);
+}
+A.dstep=d=>{const x=S.disruptions.find(y=>y.id===d.id);if(!(can('comp')||S.role==='admin'))return toast('دورك ما يسمح','bad');doStep(x,d.step);toast('تم');render();};
+A.dall=d=>{const x=S.disruptions.find(y=>y.id===d.id);if(!(can('comp')||S.role==='admin'))return toast('دورك ما يسمح','bad');dSteps(x).forEach(s=>{if(s.skip||stepDone(x,s.k))return;if(s.k==='choice')doStep(x,'rebook');else doStep(x,s.k);});toast('اكتملت كل الخطوات');render();};
+A.rstep=d=>{
+  const x=S.disruptions.find(y=>y.id===d.id),o=ORDER[x.order],r=x.ride,tl=trainLeg(o),p=PARTNERS[r.partner];
+  if(d.step==='rebook'){const t0=TRIP[x.trip0];const nt=TRIPS.find(y=>y.line===t0.line&&y.dir===t0.dir&&y.dep>t0.dep&&!y.cancelled&&avail(y,tl.cls)>=o.pax);if(!nt)return toast('ما فيه رحلة متاحة','bad');moveOrder(o,nt);tl.trip0=t0.id;anchorRides(o,true);hist(o,'ماسي',`إعادة حجز بدون رسوم على ${nt.no}`);x.done.rebook=true;}
+  if(d.step==='newride'){const other=r.partner==='JEENY'?'TAXA':'JEENY';const nt=TRIP[tl.trip];const nr=rideLeg(other,'first',stopTime(nt,tl.from)-60*MIN,tl.from);nr.addr=r.addr;o.legs.unshift(nr);o.total+=0;hist(o,'ماسي',`توصيلة بديلة مع ${PARTNERS[other].n} ${nr.ref} على حساب ماسي`);x.done.newride=`${PARTNERS[other].n} الساعة ${hhmm(nr.t)}`;nr.price=0;}
+  if(d.step==='comp'){const a=r2(r.price+tl.price*.25);addAdj({kind:'comp',order:o.id,amount:a,payer:'MASI',note:'فوات قطار بسبب الشريك'});hist(o,'ماسي','تعويض '+moneyT(a));notif('comp',1,o.id);x.done.comp=true;}
+  if(d.step==='recover'){const a=r2(r.price+tl.price*.25);addAdj({kind:'recovery',order:o.id,amount:a,payer:r.partner,status:'pending',note:'مطالبة حسب اتفاقية مستوى الخدمة'});hist(o,'ماسي',`مطالبة على ${p.n} بمبلغ ${moneyT(a)}`);x.done.recover=true;}
+  audit('خطوة فوات قطار: '+d.step,x.id);toast('تم');render();
+};
+
+/* ================= events ================= */
+let rT=null;
+function onBind(el){
+  const path=el.dataset.bind;let v=el.type==='checkbox'?el.checked:el.value;
+  if(el.type==='number'&&v!=='')v=Number(v);
+  setPath(path,v);
+  const m=path.match(/^ui\.(\w+)\./);if(m&&S.ui[m[1]]&&'page' in S.ui[m[1]]&&!path.endsWith('.page'))S.ui[m[1]].page=1;
+  if(HOOKS[path])HOOKS[path](v);
+  if((el.dataset.on||'main')==='none')return;
+  if(el.tagName==='INPUT'&&el.type!=='checkbox'){clearTimeout(rT);rT=setTimeout(render,250);}else render();
+}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-action]');if(!el||el.disabled)return;const f=A[el.dataset.action];if(f){e.preventDefault();e.stopPropagation();f(el.dataset,el);}});
+document.addEventListener('input',e=>{const el=e.target.closest('[data-bind]');if(el&&el.tagName!=='SELECT'&&el.type!=='checkbox')onBind(el);});
+document.addEventListener('change',e=>{const el=e.target.closest('[data-bind]');if(el&&(el.tagName==='SELECT'||el.type==='checkbox'))onBind(el);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.drawer)closeDrawer();if(e.key==='Enter'&&e.target.id==='gq'){S.ui.orders={q:e.target.value,line:'',status:'',ch:'',day:'',rides:false,trip:'',page:1};e.target.blur();if(!modAllowed('orders'))return toast('دورك ما يشوف الطلبات','bad');const hit=ORDER[e.target.value.trim().toUpperCase()];go('orders');if(hit)setTimeout(()=>openDrawer('order',hit.id),0);}});
+window.addEventListener('hashchange',()=>{const r=location.hash.slice(1);S.route=V[r]?r:'ops';closeDrawer();render();window.scrollTo({top:0});});
+
+/* ================= clock / timers ================= */
+function tick(){
+  const c=$('#clock');if(c){const d=new Date();c.textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());}
+  document.querySelectorAll('[data-cd]').forEach(el=>{const l=+el.dataset.cd-NOW();el.textContent=l>0?pad(Math.floor(l/MIN))+':'+pad(Math.floor(l%MIN/1000)):'انتهت';});
+}
+let lastFull=NOW();
+setInterval(()=>{
+  tick();
+  let changed=false;
+  ORDERS.forEach(o=>{if(o.st==='HOLD'&&o.holdUntil<=NOW()){o.st='EXP';releaseSeats(o);hist(o,'النظام','انتهت مهلة الدفع، المقاعد رجعت للبيع');audit('انتهاء حجز مؤقت',o.id,'النظام');changed=true;}});
+  const typing=document.activeElement&&['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName);
+  if(!typing&&(changed||NOW()-lastFull>60000)){lastFull=NOW();render();}
+},1000);
+
+/* ================= boot ================= */
+$('#roleSel').innerHTML=Object.entries(ROLES).map(([k,r])=>`<option value="${k}">${r.n}</option>`).join('');
+$('#roleSel').value=S.role;
+S.route=V[location.hash.slice(1)]?location.hash.slice(1):'ops';
+render();
+window.__masi={S,ORDERS,TRIPS};
+})();
+</script>
+</body>
+</html>
